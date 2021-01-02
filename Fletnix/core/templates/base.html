@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="Description" content="Enter your description here"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.0-alpha2/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/all.min.css">
+
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+<script src="{%static '/js/vue.min.js'%}"></script>
+<script src="https://unpkg.com/axios@0.20.0-0/dist/axios.min.js"></script>
+
+<title>{%block title%}{%endblock title%}</title>
+
+{% block css %}
+  
+{% endblock css %}
+  
+</head>
+<body style="background-color: #141414 ;">
+    <nav class="navbar navbar-expand-lg navbar-dark  sticky-top" style="background-color:#1A0D0D">
+        <div class="container-fluid">
+          <a class="navbar-brand" style="color:#cc5353" href="#"> <strong>FLETNIX</strong> </a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="{% url 'movies:index' %}">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Link</a>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-expanded="false">
+                  Categorias
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <li><a class="dropdown-item" href="#">Action</a></li>
+                  <li><a class="dropdown-item" href="#">Another action</a></li>
+                  <li><hr class="dropdown-divider"></li>
+                  <li><a class="dropdown-item" href="#">Something else here</a></li>
+                </ul>
+              </li>
+             
+            </ul>
+            <form class="d-flex" method="POST" action="{% url 'movies:searcher' %}">
+                {% csrf_token %}
+              <input class="form-control mr-2 text-white" type="search" style="background-color:#18191c" name="search" placeholder="Search" aria-label="Search">
+              <button class="btn text-white" style="background-color:#cc5353"type="submit">Search</button>
+            </form>
+          </div>
+        </div>
+      </nav>
+      
+      {% block main %}
+          
+      {% endblock main %}
+          
+
+    </div>
+
+    
+    {% block js %}
+      
+    {% endblock js %}
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.1/umd/popper.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.0-alpha2/js/bootstrap.min.js"></script>
+    </body>
+    </html>

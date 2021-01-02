@@ -1,0 +1,143 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block css %}
+<link href="{%static 'lightbox/lightbox.min.css'%}" rel="stylesheet">
+<style>
+    .card{
+        background-color: rgba(0,0,0,0.5);
+        
+        
+    }
+    
+</style>
+{% endblock css %}
+    
+{% block main %}
+<div class="container justify-content-md-center">
+    <div class="col-xl-12">
+        <div class="card mb-3 mt-5 p-3"  >
+          <div class="row g-0">
+            <div class="col-md-3" >
+              <img src="{%if res.img%}{{res.img}}{%else%}{%static 'img/no-image.png'%}{%endif%}" height="450" width="300" id="image_src" alt="..." crossorigin="anonymous">
+              <canvas id="canvas" hidden></canvas>
+            </div>
+            <div class="col-md-9 ">
+              <div class="card-body " >
+                
+                <h2 class="text-light " > <strong>{{res.title}}</strong> {{res.year}}</h2>
+                <p class="text-muted">{% for item in res.genre %}{{item}}{% if not forloop.last %},{% endif %}{%endfor%}</p>
+                <div class="summary">
+                    <h5 class="text-light ">Summary</h5>
+                    <p class="card-text text-light">{{res.summary}}</p>
+                </div>
+                
+                {% if res.trailer %}
+                <div class="trailer mt-3">
+                    <a href="https://www.youtube.com/watch?v={{res.trailer}}" class=" text-decoration-none" data-lightbox style="color: #cc5353;"><span><i class="fa fa-play" aria-hidden="true"></i></span> Watch Trailer</a>
+                </div>
+                {% endif %}
+                    
+                
+                {% if res.actors %}
+                <div class="cast mt-3">
+                    <h5 class="text-light">Cast</h5>
+                    <p class="text-muted">
+                        {% for item in res.actors  %} {{item}}{% if not forloop.last %},{% endif %}{% endfor %}
+                    </p>
+                </div>
+                {% endif %}
+                    
+                
+              </div>
+            </div>
+          </div>
+          <form action="{%url 'movies:add'%}" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="mb-3">
+                <input type="text" class="form-control" hidden id="id_title" name="title" value="{{res.title}}" >
+            </div>
+
+            <div class="mb-3">
+                <textarea class="form-control" id="id_summary" hidden name="summary"rows="2">{{res.summary}}</textarea>
+            </div>
+            
+            <div class="mb-3">
+                <textarea class="form-control" id="id_trailer" hidden name="trailer"rows="2">{{res.trailer}}</textarea>
+            </div>
+
+            <div class="mb-3">
+                <textarea class="form-control" id="id_cast" hidden name="cast"rows="2">{{res.actors}}</textarea>
+            </div>
+            
+            <div class="mb-3">
+                <input type="text" class="form-control" hidden id="id_year" value="{{res.year}}"name="year" >
+            </div>
+            
+            <div class="mb-3">
+                <input type="text" class="form-control" hidden id="id_genre" value="{% for item in res.genre %}{{item}}, {%endfor%}" name="genre" >
+            </div>
+            
+            <div class="mb-3">
+                <textarea class="form-control" id="id_cover" hidden name="cover" hidden rows="2" ></textarea>
+            </div>
+            
+            <div class="mb-3">
+                <label for="id_url" class="form-label text-light">URL</label>
+                <textarea class="form-control bg-dark text-light" id="id_url" name="url"rows="1"></textarea>
+            </div>
+
+            <button class="btn btn-outline-success" type="submit">Save to Library</button>
+        </form>
+        </div>
+    </div>
+   
+</div>
+    
+{% endblock main %}
+
+
+{% block js %}
+<script>
+image_url = document.getElementById("image_src")
+cover = document.getElementById("id_cover")
+canvas = document.getElementById('canvas')
+var width = image_url.width 
+var height = image_url.height
+
+
+function clearphoto() {
+  var context = canvas.getContext('2d');
+  context.fillStyle = "#AAA";
+  context.fillRect(0, 0, canvas.width, canvas.height);
+  var data = canvas.toDataURL('image/png');
+  cover.setAttribute('src', data);
+  
+}
+
+
+function takepicture(){
+    var context = canvas.getContext('2d');
+    
+    if (width && height) {
+        canvas.width = width;
+        canvas.height = height;
+        context.drawImage(image_url, 0, 0, width, height);
+        var data = canvas.toDataURL('image/jpg');
+        cover.innerHTML = data
+        
+    } 
+    else {
+        clearphoto();
+        }
+    }
+    window.addEventListener("load", takepicture, false)
+</script>
+<script src="{%static 'assets/dist/js/main.js'%}"></script>
+<script src="{%static 'lightbox/lightbox.min.js'%}"></script>
+{% endblock js %}
+
+
+
+    
+    
