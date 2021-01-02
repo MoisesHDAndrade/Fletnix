@@ -1,4 +1,4 @@
-from django.shortcuts import render,redirect, reverse
+from django.shortcuts import render
 from . imdb import search_imdb, get_cover
 
 

@@ -17,7 +17,7 @@ from django.contrib import admin
 from django.urls import path, include
 
 urlpatterns = [
-    path('movies/', include('Fletnix.movies.urls')),
-    path('', include('Fletnix.core.urls')),
+    path('movies/', include('Fletnix.apps.movies.urls')),
+    path('', include('Fletnix.apps.core.urls')),
     path('admin/', admin.site.urls),
 ]

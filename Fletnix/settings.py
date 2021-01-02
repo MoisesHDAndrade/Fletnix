@@ -37,8 +37,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'Fletnix.core',
-    'Fletnix.movies'
+
+
+    'Fletnix.apps.core',
+    'Fletnix.apps.movies'
 ]
 
 MIDDLEWARE = [

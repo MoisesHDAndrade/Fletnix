@@ -1,5 +1,5 @@
 from django.shortcuts import render,redirect, reverse
-from Fletnix.core.imdb import search_imdb, get_cover
+from Fletnix.apps.core.imdb import search_imdb, get_cover
 from .models import Movies
 from .forms import MoviesForm
 
