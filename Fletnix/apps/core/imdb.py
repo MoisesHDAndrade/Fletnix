@@ -75,7 +75,7 @@ def get_cover(obj):
     
     for item in cards:
         actors.append(item.p.text)
-    print(actors)
+    
 
     trailer = ''
     if soup.find(class_="play_trailer"):

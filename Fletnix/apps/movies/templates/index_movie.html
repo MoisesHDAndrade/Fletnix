@@ -66,10 +66,10 @@
                     <img src="{{movie.cover}}" style="max-width:238; max-height:350"class="card-img-top" alt="...">
                         <div class="card-img-overlay align-middle text-wrap text-center" >
                             <h5 class="text-light"> <strong>{{movie.title}}</strong> </h5>
-                            <p class="text-light" >{{movie.summary|slice:"0:400"}}</p>
+                            <p class="text-light" >{{movie.summary|slice:"0:350"}}</p>
                             <div class="row align-text-bottom">
                                 <div class="col-6">
-                                    <a href="{{movie.id}}" style="border:2px white solid; border-radius:1px" class="text-center btn text-decoration-none text-white p-4"> Play Video<span style="font-size:20px"><i  class="large material-icons text-danger" aria-hidden="true">play_circle_outline</i></span>
+                                    <a href="{% url 'movies:detail' movie.id %}" style="border:2px white solid; border-radius:1px" class="text-center btn text-decoration-none text-white p-4"> Play Video<span style="font-size:20px"><i  class="large material-icons text-danger" aria-hidden="true">play_circle_outline</i></span>
                                     </a>
                                 </div>
                                 <div class="col-6">

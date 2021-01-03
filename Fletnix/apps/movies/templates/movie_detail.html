@@ -1,0 +1,71 @@
+
+{% extends 'base.html' %}
+{% load static %}
+{% block css %}
+<style>
+    .card{
+        background-color: rgba(0,0,0,0.5);
+    }
+</style>
+{% endblock css %}
+{% block main %}
+<div class="container ">
+    <div class="col-xl-12 ">
+        <div class="card mb-3 mt-5 p-3"  >
+            {% if not 'youtube' in obj.url %}
+        {% endif %}
+          <div class="row g-0">
+            {% if  'youtube' in obj.url %}
+            <div class="col-md-3" >
+                <img src="{{obj.cover}}" height="450" width="300" id="image_src" alt="..." crossorigin="anonymous">
+              </div>
+            {% else %}
+            <div class="col-md-3">
+                <div class="d-flex justify-content-md-center text-center">
+                    <video
+                        id="my-video"
+                        class="video-js video-js-responsive-container"
+                        controls
+                        autoplay
+                        preload="auto"
+                        width="640"
+                        height="480"
+                        poster="{{obj.cover}}"
+                        data-setup="{}">
+                        <source src="{{obj.url}}" type="video/mp4">
+                    </video>
+                </div>
+            </div>
+            {% endif %} 
+            <div class="col-md-9">
+              <div class="card-body " >
+                <h2 class="text-light " > <strong>{{obj.title}}</strong> {{obj.year}}</h2>
+                <p class="text-muted">{{obj.genre}}</p>
+                <div class="summary">
+                    <h5 class="text-light ">Summary</h5>
+                    <p class="card-text text-light">{{obj.summary}}</p>
+                </div>
+                {% if 'youtube' in obj.url %}
+                <div class="trailer mt-3">
+                    <a href="{{obj.url}}" class=" text-decoration-none" data-lightbox style="color: #cc5353;"><span><i class="fa fa-play" aria-hidden="true"></i></span> Watch Movie</a>
+                </div>
+                {% endif %}
+                {% if obj.cast %}
+                <div class="cast mt-3">
+                    <h5 class="text-light">Cast</h5>
+                    <p class="text-muted">
+                        {{obj.cast}}
+                    </p>
+                </div>
+                {% endif %} 
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
+</div>
+{% endblock main %}
+
+    
+
+    

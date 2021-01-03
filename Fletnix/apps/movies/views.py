@@ -1,4 +1,4 @@
-from django.shortcuts import render,redirect, reverse
+from django.shortcuts import render,redirect, get_object_or_404
 from Fletnix.apps.core.imdb import search_imdb, get_cover
 from .models import Movies
 from .forms import MoviesForm
@@ -6,16 +6,18 @@ from .forms import MoviesForm
 
 lista = []
 
-def search_movie(request):
-    return render(request, 'search_movie.html')
+
 
 def movie_index(request):
     movies = Movies.objects.all()
     return render(request, 'index_movie.html', {'movies':movies})
 
+def movie_detail(request, pk):
+    movie = get_object_or_404(Movies, pk = pk)
+    return render(request, 'movie_detail.html', {'obj':movie})
 
 def movie_searcher(request):
-    
+
     dicionario = dict()
     global lista
     lista = []
