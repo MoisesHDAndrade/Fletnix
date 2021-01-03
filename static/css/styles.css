@@ -1,0 +1,37 @@
+.dropdown-menu{
+    transition: 0.5s ease
+}
+.dropdown-menu li:hover{
+    background-color:#18191c;
+    transition: 0.5s ease
+}
+
+.form-control{
+    border:none;
+}
+.form-control:focus{
+    border: 1px solid #e0e2e6;
+    box-shadow: none;
+    
+}
+
+#movie-scraper{
+    visibility: hidden;
+    right: 10;
+    display: none;
+    width:0px;
+    transition: width 0.5s;
+    color: #fff
+}
+
+#movie-scraper:hover{
+    
+    right: 0;
+    width: 250px;
+    transition: width 0.5s
+}
+
+.hover-expand-input{
+    width: 150px;
+    transition: width 0.5s
+}
