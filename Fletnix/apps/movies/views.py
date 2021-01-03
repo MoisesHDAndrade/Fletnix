@@ -17,14 +17,15 @@ def movie_detail(request, pk):
     return render(request, 'movie_detail.html', {'obj':movie})
 
 def movie_searcher(request):
-
+    res = ''
     dicionario = dict()
     global lista
     lista = []
     if request.method =='POST':
         search = request.POST.get('search')
-    res = search_imdb(search)
-    print(res)
+        res = search_imdb(search)
+    
+    
     for item in res:
         dicionario = {
             'link':item.a.get('href'), 
