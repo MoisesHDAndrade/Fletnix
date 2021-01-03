@@ -3,8 +3,9 @@ from . import views
 
 app_name = 'movies'
 urlpatterns = [
-    path('index/', views.movie_index, name = 'index'),
-    path('', views.movie_searcher, name = 'searcher'),
-    path('movie/<int:pk>/', views.movie_info, name = 'info'),
-    path('new/',views.movie_add, name = 'add')
+    path('', views.movie_index, name = 'index'),
+    path('searcher/', views.movie_searcher, name = 'searcher'),
+    path('movie/info/<int:pk>/', views.movie_info, name = 'info'),
+    path('new/',views.movie_add, name = 'add'),
+    path('search/',views.search_movie, name = 'search')
 ]

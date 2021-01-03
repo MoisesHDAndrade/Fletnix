@@ -11,68 +11,59 @@
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <link rel="stylesheet" href="{%static 'css/styles.css'%}">
 <script src="{%static '/js/vue.min.js'%}"></script>
+<link rel="icon" href="{% static 'img/favicon.ico' %}" type="image/x-icon">
 <script src="https://unpkg.com/axios@0.20.0-0/dist/axios.min.js"></script>
 <title>Fletnix | {%block title%}{%endblock title%}</title>
 {% block css %} 
 {% endblock css %}
 </head>
 <body style="background-color: #141414 ;">
+  <div id="nav-app">
     <nav class="navbar navbar-expand-lg navbar-dark  sticky-top" style="background-color:rgba(0,0,0,0.3)">
-        <div class="container-fluid">
-          <a class="navbar-brand" style="color:#cc5353" href="#"> <img style="height:35px;width: 100px;"src="{%static 'img/logo.png'%}" alt=""> </a>
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto mb-2 mb-lg-0">
-              <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="{% url 'movies:index' %}">Home</a>
-              </li>
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-expanded="false">
-                  Categories
-                </a>
-                <ul class="dropdown-menu p-0 bg-dark bg-gradient" aria-labelledby="navbarDropdown">
-                  <li><a class="dropdown-item  bg-transparent text-light" href="#">Action</a></li>
-                  <li><a class="dropdown-item  bg-transparent  text-light" href="#">Another action</a></li>
-                  <li><a class="dropdown-item bg-transparent  text-light" href="#">Something else here</a></li>
-                </ul>
-              </li>
-            </ul>
-            <form class="d-flex" method="POST" action="{% url 'movies:searcher' %}">
-                {% csrf_token %}
-              <input id="movie-scraper" class="form-control mr-2 text-white"  type="search" style="background-color:#18191c;" 
-              name="search" autocomplete="off" placeholder="Search" aria-label="Search"><span><i  id="search-icon" class="fa fa-search mr-2 fa-2x" ></i></span>
-              <button class="btn text-white" style="background-color:#cc5353"type="submit">Search</button>
-            </form>
-          </div>
+      <div class="container-fluid">
+        <a class="navbar-brand" style="color:#cc5353" href="#"> <img style="height:35px;width: 100px;"src="{%static 'img/logo.png'%}" alt=""> </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="{% url 'movies:index' %}">Home</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownCategories" role="button" data-toggle="dropdown" aria-expanded="false">
+                Categories
+              </a>
+              <ul class="dropdown-menu p-0 bg-dark bg-gradient" aria-labelledby="navbarDropdownCategories">
+                <li><a class="dropdown-item  bg-transparent text-light" href="#">Action</a></li>
+                <li><a class="dropdown-item  bg-transparent  text-light" href="#">Another action</a></li>
+                <li><a class="dropdown-item bg-transparent  text-light" href="#">Something else here</a></li>
+              </ul>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownActions" role="button" data-toggle="dropdown" aria-expanded="false">
+                Actions
+              </a>
+              <ul class="dropdown-menu p-0 bg-dark bg-gradient" aria-labelledby="navbarDropdownActions">
+                <li><a class="dropdown-item  bg-transparent text-light" href="{% url 'movies:search' %}">Add a new movie to library</a></li>
+                
+              </ul>
+            </li>
+          </ul>
+          <form class="d-flex" method="POST" action="{% url 'movies:searcher' %}">
+              {% csrf_token %}
+            <input id="movie-scraper" class="form-control mr-2 text-white"  type="search" style="background-color:#18191c;" 
+            name="search" autocomplete="off" placeholder="Search" aria-label="Search"><span><i  id="search-icon" class="fa fa-search mr-2 fa-2x" ></i></span>
+            <button class="btn text-white" style="background-color:#cc5353"type="submit">Search</button>
+          </form>
         </div>
-      </nav>
-      {% block main %}{% endblock main %}
-    </div>
+      </div>
+    </nav>
+  </div>
+    
+    {% block main %}{% endblock main %}
     {% block js %}{% endblock js %}
-    <script>
-      let searchIcon = document.getElementById("search-icon")
-      let movieScraper = document.getElementById("movie-scraper")
-      searchIcon.addEventListener("click", function(){
-        movieScraper.style.display = "block"
-        movieScraper.style.visibility = "visible"
-        movieScraper.style.width = "150px"
-        movieScraper.style.transition = "0.5s"
-        movieScraper.classList.add("hover-expand-input")
-      })
-      searchIcon.addEventListener("mouseover", function(){
-       movieScraper.style.display = "block"
-       
-        movieScraper.classList.add("hover-expand-input")
-      })
-      movieScraper.addEventListener("mouseout", function(){
-        movieScraper.style.display = "none"
-        movieScraper.style.visibility = "hidden"
-        movieScraper.style.width = "0px"
-        movieScraper.style.transition = "width 0.5s"
-      })
-    </script>
+    <script src="{%static 'js/fletnix-main.js'%}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.1/umd/popper.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.0-alpha2/js/bootstrap.min.js"></script>
     </body>

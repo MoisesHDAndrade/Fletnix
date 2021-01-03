@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block main %}
+    <div class="container">
+        <div class="col-xl-12 mt-3">
+            <form class="d-flex" method="POST" action="{% url 'movies:searcher' %}">
+                {% csrf_token %}
+              <input  class="form-control mr-2 text-white"  type="search" style="background-color:#18191c;" 
+              name="search" autocomplete="off" placeholder="Search" aria-label="Search"><span><i  id="search-icon" class="fa fa-search mr-2 fa-2x" ></i></span>
+              <button class="btn text-white" style="background-color:#cc5353"type="submit">Search</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="container" >
+        <div class=" col-xl-12"  >
+          <div class="row mt-3 justify-content-center">
+            {% if res %}
+            {% for item in res %}
+            <div class="col-md-8">
+              <a class="text-light text-decoration-none" href="{% url 'movies:info' forloop.counter %}" >
+                <div class="card mb-2 bg-dark" >
+                  <div class="row g-0">
+                    <div class="col-md-2 mt-1 mb-1" >
+                      {% if 'None' in item.image %}
+                        <img src="{%static 'img/no-image.png'%}" alt="" style="width:94px;height:141px">
+                      {% else %}
+                      {{item.image|safe}}
+                      {% endif %}
+                    </div>
+                    <div class="col-md-6 ">
+                      <div class="card-body " >
+                        <h5 class="card-title text-left" >{{item.text}}</h5>
+                        <p class="card-text">{{item.summary}}</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </a>
+            </div>
+            {% endfor %}
+            {%endif%}
+            
+          </div>
+        </div>
+      </div>
+{% endblock main %}
+    

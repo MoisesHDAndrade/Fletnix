@@ -6,13 +6,16 @@ from .forms import MoviesForm
 
 lista = []
 
+def search_movie(request):
+    return render(request, 'search_movie.html')
+
 def movie_index(request):
     movies = Movies.objects.all()
     return render(request, 'index_movie.html', {'movies':movies})
 
 
 def movie_searcher(request):
-    search = ''
+    
     dicionario = dict()
     global lista
     lista = []
@@ -30,7 +33,7 @@ def movie_searcher(request):
             }
         lista.append(dicionario)
     # print(dicionario)
-    return render(request, 'index.html', {'res':lista})
+    return render(request, 'search_movie.html', {'res':lista})
 
 def movie_info(request,pk):
     global lista
