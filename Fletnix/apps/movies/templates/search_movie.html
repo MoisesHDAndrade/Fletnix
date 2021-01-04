@@ -8,7 +8,7 @@
             <form class="d-flex" method="POST" action="{% url 'movies:searcher' %}">
                 {% csrf_token %}
               <input  class="form-control mr-2 text-white"  type="search" style="background-color:#18191c;" 
-              name="search" autocomplete="off" placeholder="Search" aria-label="Search"><span><i  id="search-icon" class="fa fa-search mr-2 fa-2x" ></i></span>
+              name="search" autocomplete="off" placeholder="Search" aria-label="Search">
               <button class="btn text-white" style="background-color:#cc5353"type="submit">Search</button>
             </form>
         </div>

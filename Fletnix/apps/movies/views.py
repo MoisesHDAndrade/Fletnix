@@ -1,16 +1,32 @@
 from django.shortcuts import render,redirect, get_object_or_404
+from django.views.generic import ListView
 from Fletnix.apps.core.imdb import search_imdb, get_cover
 from .models import Movies
 from .forms import MoviesForm
-
+from django.db.models import Q
+import requests
 
 lista = []
 
 
+class MovieIndexView(ListView):
+    model = Movies
+    context_object_name = 'movies'
+    template_name = 'index_movie.html'
 
-def movie_index(request):
-    movies = Movies.objects.all()
-    return render(request, 'index_movie.html', {'movies':movies})
+class MovieSearchView(MovieIndexView):
+    template_name = 'library_movie_search.html'
+
+    def get_queryset(self):
+        search = self.request.GET.get('search')
+        qs = super().get_queryset()
+        qs = qs.filter(
+            Q(title__icontains = search) |
+            Q(genre__icontains = search))
+        if not search and not qs:
+            return qs
+        return qs
+
 
 def movie_detail(request, pk):
     movie = get_object_or_404(Movies, pk = pk)
@@ -24,8 +40,6 @@ def movie_searcher(request):
     if request.method =='POST':
         search = request.POST.get('search')
         res = search_imdb(search)
-    
-    
     for item in res:
         dicionario = {
             'link':item.a.get('href'), 
@@ -64,6 +78,10 @@ def movie_add(request):
 
             )
             data_from_form.genre = data_from_form.genre[0:-1]
+            if not data_from_form.trailer:
+                data_from_form.trailer = 'https://www.youtube.com/watch?v=trailer'
+            if not data_from_form.cast:
+                data_from_form.cast = 'Information not available'
             data_from_form.save()
             return redirect('movies:index')
         else:
