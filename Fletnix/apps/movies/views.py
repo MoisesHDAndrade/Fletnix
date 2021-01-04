@@ -1,9 +1,12 @@
 from django.shortcuts import render,redirect, get_object_or_404
 from django.views.generic import ListView
+from django.contrib import messages
+from django.db.models import Q
+
 from Fletnix.apps.core.imdb import search_imdb, get_cover
 from .models import Movies
 from .forms import MoviesForm
-from django.db.models import Q
+
 import requests
 
 lista = []
@@ -27,7 +30,6 @@ class MovieSearchView(MovieIndexView):
             return qs
         return qs
 
-
 def movie_detail(request, pk):
     movie = get_object_or_404(Movies, pk = pk)
     return render(request, 'movie_detail.html', {'obj':movie})
@@ -44,12 +46,10 @@ def movie_searcher(request):
         dicionario = {
             'link':item.a.get('href'), 
             'text':item.h2.text,
-            # 'summary':item.p, 
             'summary':item.find(class_="overview").text, 
             'image':str(item.img)
             }
         lista.append(dicionario)
-    # print(dicionario)
     return render(request, 'search_movie.html', {'res':lista})
 
 def movie_info(request,pk):
@@ -83,11 +83,11 @@ def movie_add(request):
             if not data_from_form.cast:
                 data_from_form.cast = 'Information not available'
             data_from_form.save()
+            messages.success(request, f'Yay! "{data_from_form.title}" was added to your library')
             return redirect('movies:index')
         else:
             print('form nao foi valido')
     return render(request, 'movie_info.html', {'form':form})
-
 
 
 

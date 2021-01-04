@@ -1,19 +1,17 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block title %}Search{% endblock title %}
-    
 {% block main %}
     <div class="container">
         <div class="col-xl-12 mt-3">
             <form class="d-flex" method="POST" action="{% url 'movies:searcher' %}">
                 {% csrf_token %}
-              <input  class="form-control mr-2 text-white"  type="search" style="background-color:#18191c;" 
+              <input  class="form-control mr-2 text-white" id="movie-searcher" autofocus type="search" style="background-color:#18191c;" 
               name="search" autocomplete="off" placeholder="Search" aria-label="Search">
               <button class="btn text-white" style="background-color:#cc5353"type="submit">Search</button>
             </form>
         </div>
     </div>
-
     <div class="container" >
         <div class=" col-xl-12"  >
           <div class="row mt-3 justify-content-center">
@@ -46,4 +44,10 @@
         </div>
       </div>
 {% endblock main %}
+
+
+{% block js %}
+ 
+{% endblock js %}
+  
     

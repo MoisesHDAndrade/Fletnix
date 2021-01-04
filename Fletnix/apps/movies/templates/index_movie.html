@@ -52,8 +52,15 @@
 </style>
 {% endblock css %}
 {% block main %}
+<div class="container">
+ 
+</div>
+<div class="container-fluid">
+  {% include 'includes/_messages.html' %}
+</div>
+</div>
 <div class="container ">
-    <div class="col-xl-12  ">
+    <div class="col-xl-12 ">
         <div class="row mt-3 ">
             {% for movie in movies %}
             <div class="col col-xl-3  mt-2">
@@ -83,9 +90,25 @@
         </div>
     </div>
 </div>
+
+
 {% endblock main %}
+
+
 {% block js %}
-<script src="{%static 'assets/dist/js/main.js'%}"></script>
-<script src="{%static 'lightbox/lightbox.min.js'%}"></script>
+  <script>
+     $( document ).ready(function() {
+      var message = setTimeout(function(){
+            $(".alert").fadeTo(2000, 500).slideUp(500, function () {
+                    $(".alert").remove();
+                });
+              }, 5000);//5000=5 seconds
+            })
+      
+
+      
+  </script>
 {% endblock js %}
+  
+
     

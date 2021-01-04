@@ -7,11 +7,7 @@
     }
 </style>
 {% endblock css %}
-
-{% block title %}
-    {{obj.title}} | Detail
-{% endblock title %}
-    
+{% block title %}{{obj.title}} | Detail{% endblock title %}
 {% block main %}
 <div class="container ">
     <div class="col-xl-12 ">
@@ -19,28 +15,9 @@
             {% if not 'youtube' in obj.url %}
         {% endif %}
           <div class="row g-0">
-            {% if  'youtube' in obj.url %}
             <div class="col-md-3" >
                 <img src="{{obj.cover}}" height="450" width="300" id="image_src" alt="..." crossorigin="anonymous">
               </div>
-            {% else %}
-            <div class="col-md-3">
-                <div class="d-flex justify-content-md-center text-center">
-                    <video
-                        id="my-video"
-                        class="video-js video-js-responsive-container"
-                        controls
-                        autoplay
-                        preload="auto"
-                        width="640"
-                        height="480"
-                        poster="{{obj.cover}}"
-                        data-setup="{}">
-                        <source src="{{obj.url}}" type="video/mp4">
-                    </video>
-                </div>
-            </div>
-            {% endif %} 
             <div class="col-md-9">
               <div class="card-body " >
                 <h2 class="text-light " > <strong>{{obj.title}}</strong> {{obj.year}}</h2>
@@ -52,6 +29,10 @@
                 {% if 'youtube' in obj.url %}
                 <div class="trailer mt-3">
                     <a href="{{obj.url}}" class=" text-decoration-none" data-lightbox style="color: #cc5353;"><span><i class="fa fa-play" aria-hidden="true"></i></span> Watch Movie</a>
+                </div>
+                {% else %}
+                <div class="trailer mt-3">
+                    <a href="" class=" text-decoration-none" data-bs-toggle="modal" data-bs-target="#videoModal" style="color: #cc5353;"><span><i class="fa fa-play" aria-hidden="true"></i></span> Watch Movie</a>
                 </div>
                 {% endif %}
                 {% if obj.cast %}
@@ -70,8 +51,41 @@
 </div>
 
 
-
+  
+  <!-- Modal -->
+  <div class="modal fade" id="videoModal" tabindex="-1" aria-labelledby="videoModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg bg-transparent">
+      <div class="modal-content bg-transparent">
+        <div class="d-flex justify-content-md-center text-center">
+            <video
+                id="my-video"
+                class="video-js video-js-responsive-container"
+                controls
+                autoplay
+                preload="auto"
+                width="640"
+                height="480"
+                poster="{{obj.cover}}"
+                data-setup="{}">
+                <source src="{{obj.url}}" type="video/mp4">
+            </video>
+        </div>
+      </div>
+    </div>
+  </div>
 {% endblock main %}
+
+{% block js %}
+    <script>
+        const videoPlayer = document.getElementById("my-video")
+        const videoModal = document.getElementById("videoModal")
+        videoModal.addEventListener('hidden.bs.modal', function(){
+            videoPlayer.pause()
+        })
+       
+    </script>
+{% endblock js %}
+    
 
     
 

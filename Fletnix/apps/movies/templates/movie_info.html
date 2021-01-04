@@ -51,13 +51,8 @@
             </div>
             <div class="mb-3">
                 <textarea class="form-control" id="id_trailer" hidden name="trailer"rows="2"> 
-                {% if not res.trailer %}
-                https://www.youtube.com/watch?v=trailer
-                {% else %}
-                {{res.trailer}}
-                {% endif %}
-                
-                     </textarea>
+                    {% if not res.trailer %}https://www.youtube.com/watch?v=trailer{% else %}{{res.trailer}}{% endif %}
+                </textarea>
             </div>
             <div class="mb-3">
                 <textarea class="form-control" id="id_cast" hidden name="cast"rows="2">{% for item in res.actors  %}{{item}}{% if not forloop.last %}, {% endif %}{% endfor %}</textarea>
@@ -73,7 +68,7 @@
             </div>
             <div class="mb-3">
                 <label for="id_url" class="form-label text-light">URL</label>
-                <textarea class="form-control bg-dark text-light" id="id_url" name="url"rows="1"></textarea>
+                <textarea class="form-control bg-dark text-light" id="id_url" autofocus name="url"rows="1"></textarea>
             </div>
             <button class="btn btn-outline-success" type="submit">Save to Library</button>
         </form>
