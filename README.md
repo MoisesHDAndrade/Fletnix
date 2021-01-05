@@ -23,6 +23,7 @@ Planning to integrate VueJS
 * Run python manage.py migrate
 * Run python manage.py runserver 0.0.0.0:8000
 * Run ifconfig to know what it is your local ip address  exxample:*192.168.1.12*
+* Add your local ip address on ALLOWED_HOSTS in settings.py
 * Install Apache
 * Go to your Apache folder '/var/www/'
 * Give admin permissions to your a Apache folder
@@ -38,7 +39,7 @@ Planning to integrate VueJS
 
 ---
 If you are not sure where it is your files, bur you already installed Apache
-just type your local ip address your browser + your folder like this *http://192.168.1.12/movies/*
+just type your local ip address your browser + your movie folder like this *http://192.168.1.12/movies/*
 
 ##### Important
 Do not use for commercial purpose
