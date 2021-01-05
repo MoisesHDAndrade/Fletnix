@@ -4,7 +4,7 @@
 ---
 
 ## About
-Fletnix use Django as a backend and scrape all the informations with python requests and BeatifulSoup4 libs from [TMDB](https://www.themoviedb.org/)
+Fletnix use Django as a backend and scrape all the informations with python requests and BeatifulSoup4 libs from [TMDB](https://www.themoviedb.org/), 
 Javascript Vanilla to manipulate the DOM and Bootstrap 5 
 Planning to integrate VueJS
 
