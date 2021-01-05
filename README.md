@@ -40,5 +40,11 @@ Planning to integrate VueJS
 If you are not sure where it is your files, bur you already installed Apache
 just type your local ip address your browser + your folder like this *http://192.168.1.12/movies/*
 
-##### Disclaimer 
+##### Important
 Do not use for commercial purpose
+
+#### Screenshots
+![alt text](https://github.com/FuryAndRage/Fletnix/blob/main/images/index.png "Index") 
+![](https://github.com/FuryAndRage/Fletnix/blob/main/images/scraping_movie.png "Scraping")
+![](https://github.com/FuryAndRage/Fletnix/blob/main/images/movie_info_scraping.png "Scraping Movie info")
+![](https://github.com/FuryAndRage/Fletnix/blob/main/images/movie_detail.png "Detail")
