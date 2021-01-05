@@ -47,7 +47,6 @@ def movie_detail(request, pk):
     return render(request, 'movie_detail.html', {'obj':movie})
 
 def movie_searcher(request):
-    
     res = ''
     dicionario = dict()
     global lista
@@ -73,7 +72,6 @@ def movie_searcher(request):
             }
         
         lista.append(dicionario)
-    
     return render(request, 'search_movie.html', {'res':lista})
 
 def movie_info(request,pk):

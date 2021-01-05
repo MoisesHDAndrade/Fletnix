@@ -76,11 +76,9 @@ def get_cover(obj):
     for item in cards:
         actors.append(item.p.text)
     
-
     trailer = ''
     if soup.find(class_="play_trailer"):
         trailer = soup.find(class_="play_trailer").get('data-id')
-
     
     summary = ''
     if soup.find(class_="overview") != None:
@@ -99,8 +97,6 @@ def get_cover(obj):
     image_content = soup.find("div", class_="image_content")
     
     img = image_content.findChildren("img", recursive = False)
-    
-    
     if img:
         imagem = ''
         try:
@@ -112,10 +108,6 @@ def get_cover(obj):
         except Exception as e:
            
             imagem = f"https://www.themoviedb.org{img[0].get('data-src')}"
-        
-        
-       
-        
     
     res = {
         'title':title.a.text, 
@@ -127,7 +119,6 @@ def get_cover(obj):
         'actors':actors}
     
     return res
-
 def search_imdb(url_string):
 	headers = {'User-Agent': 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:52.0) Gecko/20100101 Firefox/52.0'}
 	url = f'https://www.themoviedb.org/search?query={url_string}'
