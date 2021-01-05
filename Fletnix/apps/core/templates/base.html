@@ -21,7 +21,6 @@
 {% endblock css %}
 </head>
 <body style="background-color: #141414 ;">
-  
     <nav class="navbar navbar-expand-lg navbar-dark  sticky-top" style="background-color:rgba(0,0,0,0.3)">
       <div class="container-fluid">
         <a class="navbar-brand" style="color:#cc5353" href="{% url 'movies:index' %}"> <img style="height:35px;width: 100px;"src="{%static 'img/logo.png'%}" alt=""> </a>
@@ -49,7 +48,6 @@
                 <li><a class="dropdown-item bg-transparent  text-light" href="{%url 'movies:library_search'%}?search=romance">Romance</a></li>
               </ul>
             </li>
-
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle " href="#" id="navbarDropdownActions" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                 Actions
@@ -58,21 +56,17 @@
                 <li><a class="dropdown-item  bg-transparent text-light" href="{% url 'movies:searcher' %}">Add a new movie to library</a></li>
               </ul>
             </li>
-            
           </ul>
           <form class="d-flex" method="GET" action="{% url 'movies:library_search' %}">
             <input id="movie-scraper" class="form-control mr-e text-white"  type="search" style="background-color:#18191c;"
             name="search" autocomplete="off" placeholder="Search" aria-label="Search"><span><i  id="search-icon" class="fa fa-search mr-2 fa-2x" ></i></span>
-            
           </form>
         </div>
       </div>
     </nav>
-  
     {% block main %}{% endblock main %}
     {% block js %}{% endblock js %}
     <script>
-
      $( document ).ready(function() {
       var message = setTimeout(function(){
             $(".alert").fadeTo(2000, 500).slideUp(500, function () {
@@ -90,6 +84,3 @@
     <script src="https://vjs.zencdn.net/7.7.5/video.js"></script>
     </body>
     </html>
-
-
-    

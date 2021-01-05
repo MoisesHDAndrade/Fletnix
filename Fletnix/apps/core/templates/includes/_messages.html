@@ -3,11 +3,9 @@
         <div class="col-sm-4  float-right" style="z-index:2000;position:absolute">
             {% for message in messages %}
             <div id="alert" class=" alert-dismissible fade show text-center alert {{ message.tags }}" role="alert" data-auto-dismiss="5000">
-                
                 <h5>{{ message }}</h5>
             </div>
             {% endfor %}
         </div>
     </div>
-
 {% endif %}
