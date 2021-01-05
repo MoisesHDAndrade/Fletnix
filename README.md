@@ -1,6 +1,6 @@
 # Fletnix 
 
-**Fletnix** is a site where allow anyone inside your localhost watch your saved movies from your browser
+**Fletnix** is a site where allow anyone inside your local internet to watch your saved movies from your browser
 ---
 
 ## About
