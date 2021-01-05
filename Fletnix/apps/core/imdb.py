@@ -102,7 +102,20 @@ def get_cover(obj):
     
     
     if img:
-        imagem = img[0].get('data-src')
+        imagem = ''
+        try:
+            imagem = img[0].get('data-src')
+            if requests.get(imagem).status_code != 200:
+                imagem = f"https://www.themoviedb.org{img[0].get('data-src')}"
+               
+
+        except Exception as e:
+           
+            imagem = f"https://www.themoviedb.org{img[0].get('data-src')}"
+        
+        
+       
+        
     
     res = {
         'title':title.a.text, 
@@ -121,7 +134,9 @@ def search_imdb(url_string):
 	result = dict()
 	page = requests.get(url, headers = headers)
 	soup = bs(page.text, 'html.parser')
+    
 	result_div = soup.find_all(class_="card v4 tight")
 	results = (item for item in result_div)
-	
+	# print(soup.find_all("img", class_="poster")[0].get('src'))
+    
 	return results

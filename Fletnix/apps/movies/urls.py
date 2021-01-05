@@ -9,6 +9,9 @@ urlpatterns = [
     path('movie/info/<int:pk>/', views.movie_info, name = 'info'),
     path('new/',views.movie_add, name = 'add'),
     path('movie/library/<int:pk>/', views.movie_detail, name = 'detail'),
+
+    path('api/movies/', views.MoviesAddApiView.as_view(), name='list_api_view'),
+    path('api/movies/<int:pk>/', views.MovieUpdateApiView.as_view(), name='movie_update_view'),
    
     
 ]

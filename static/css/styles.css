@@ -32,6 +32,7 @@
 }
 
 .hover-expand-input{
+    right: 0;
     width: 150px;
     transition: width 0.5s
 }

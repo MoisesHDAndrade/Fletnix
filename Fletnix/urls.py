@@ -19,5 +19,6 @@ from django.urls import path, include
 urlpatterns = [
     path('', include('Fletnix.apps.movies.urls')),
     path('core/', include('Fletnix.apps.core.urls')),
+    path('api/', include('rest_framework.urls')),
     path('admin/', admin.site.urls),
 ]
