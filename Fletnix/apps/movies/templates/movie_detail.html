@@ -26,7 +26,7 @@
                     <h5 class="text-light ">Summary</h5>
                     <p class="card-text text-light">{{obj.summary}}</p>
                 </div>
-                {% if 'youtube' in obj.url %}
+                {% if 'youtube' in obj.url and not 'embed' in obj.url %}
                 <div class="trailer mt-3">
                     <a href="{{obj.url}}" class=" text-decoration-none" data-lightbox style="color: #cc5353;"><span><i class="fa fa-play" aria-hidden="true"></i></span> Watch Movie</a>
                 </div>
