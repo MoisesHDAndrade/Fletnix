@@ -1,6 +1,6 @@
 # Fletnix 
 
-**Fletnix** is a site where allow anyone inside your localhost watch your saved movies from your browser
+**Fletnix** is a site where allow anyone inside your local internet to watch your saved movies from your browser
 ---
 
 ## About
@@ -32,7 +32,7 @@ Javascript Vanilla to manipulate the DOM and Bootstrap 5
 #### Now the best part
 * Add your movies to library on menu "actions"
 * Search by the name of movie that you want add
-* Pick it up one of that those
+* Pick it up one of those 
 * Add a URL using the follow address
   - your machine local ip address 
   - followed by the folder where it is your file *like http://192.168.1.12/movies/my_movie.mp4*
