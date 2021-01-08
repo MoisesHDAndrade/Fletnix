@@ -30,10 +30,11 @@
                 <div class="trailer mt-3">
                     <a href="{{obj.url}}" class=" text-decoration-none" data-lightbox style="color: #cc5353;"><span><i class="fa fa-play" aria-hidden="true"></i></span> Watch Movie</a>
                 </div>
+                
                 {% else %}
                 <div class="trailer mt-3">
                     <a href="" class=" text-decoration-none" data-bs-toggle="modal" data-bs-target="#videoModal" style="color: #cc5353;"><span><i class="fa fa-play" aria-hidden="true"></i></span> Watch Movie</a>
-                </div>
+                  </div>
                 {% endif %}
                 {% if obj.cast %}
                 <div class="cast mt-3">
@@ -57,7 +58,11 @@
     <div class="modal-dialog modal-dialog-centered modal-lg bg-transparent">
       <div class="modal-content bg-transparent">
         <div class="d-flex justify-content-md-center text-center">
-            <video
+          
+          {% if 'iframe' in obj.url %}
+            {{obj.url|safe}}
+          {% else %}
+          <video
                 id="my-video"
                 class="video-js video-js-responsive-container"
                 controls
@@ -69,6 +74,9 @@
                 data-setup="{}">
                 <source src="{{obj.url}}" type="video/mp4">
             </video>
+          {% endif %}
+            
+            
         </div>
       </div>
     </div>
