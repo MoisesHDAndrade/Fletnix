@@ -57,9 +57,29 @@
 <div class="container-fluid">
   {% include 'includes/_messages.html' %}
 </div>
-<div class="container ">
+<div class="container">
+  <h3 class=" text-white">Recently added</h3>
+  <div class="gallery js-flickity" data-flickity-options='{ "freeScroll": true, "wrapAround": true }'>
+    
+    {% for movie in recents %}
+    <div class="gallery-cell">
+      <a href="{%url 'movies:detail' movie.id%}"><img src="{{movie.cover}}" alt="">
+        <div class="carousel-caption d-none d-md-block " style="background-color:rgba(0,0,0,0.8);">
+          <h5> <strong>{{movie.title}}</strong> </h5>
+          
+        </div></a>
+      
+    </div>
+    {% endfor %}
+      
+    
+    
+  </div>
+</div>
+<div class="container mt-5 ">
+  <h3 class=" text-white">Your Library</h3>
     <div class="col-xl-12 col ">
-        <div class="row mt-3 ">
+        <div class="row ">
             {% for movie in movies %}
             <div class="d-flex justify-content-center col-xl-3 col-sm-6 mt-2 align-items-center">
                 <div class="card" style="width: 18rem;border: none;">

@@ -29,6 +29,12 @@ class MovieIndexView(ListView):
     template_name = 'index_movie.html'
     paginate_by =  8
 
+    def get_context_data(self):
+        context = super().get_context_data()
+        context['recents'] = Movies.objects.all().order_by('-id')[:7]
+        print(context)
+        return context
+
 class MovieSearchView(MovieIndexView):
     template_name = 'library_movie_search.html'
     paginate_by =  300
@@ -41,6 +47,8 @@ class MovieSearchView(MovieIndexView):
         if not search and not qs:
             return qs
         return qs
+    
+    
 
 def movie_detail(request, pk):
     movie = get_object_or_404(Movies, pk = pk)
