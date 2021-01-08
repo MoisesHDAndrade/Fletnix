@@ -27,12 +27,12 @@ class MovieIndexView(ListView):
     model = Movies
     context_object_name = 'movies'
     template_name = 'index_movie.html'
-    paginate_by =  8
+    paginate_by = 12
 
     def get_context_data(self):
         context = super().get_context_data()
         context['recents'] = Movies.objects.all().order_by('-id')[:7]
-        print(context)
+        
         return context
 
 class MovieSearchView(MovieIndexView):
