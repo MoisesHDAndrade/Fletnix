@@ -9,7 +9,7 @@ Javascript Vanilla to manipulate the DOM and Bootstrap 5
 (Planning to integrate VueJS)
 
 ## Features
-* Work with MP4 files and Youtube links
+* Work with MP4 files and Youtube links and embed links
 * Display summary, cover and cast
 * Template inspirate by Netflix
 * API available, but you can change whatever you want to
