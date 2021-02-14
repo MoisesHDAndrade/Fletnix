@@ -53,20 +53,29 @@
             </div>
         </div>
 
-        {% for obj in request.user.user_profile.profiles.all  %}
-        <div class="row justify-content-center">
-            <div class="col-lg-8">
-                <div class="card mt-5">
-                    <div class="card-body">                        
-                        <div class="row justify-content-center">
-                            {{obj.user_name}}
-                        </div>
+      
+        <div class="row justify-content-center mt-2">
+            <div class="col-8">
+                <div class="row">
+                    {% for obj in request.user.user_profile.profiles.all  %}
+            <div class="col-3">
+                <div class="card" style="width: 15rem;background-color:pink">
+                    <!-- testando avatars para profiles -->
+                    <img src="https://cdn0.iconfinder.com/data/icons/child-1-1/70/baby-child-girl-512.png" class="card-img-top" height="150" alt="...">
+                    <div class="card-body">
+                      <p class="card-text"></p>
                     </div>
+                  </div>
+                  <p class="text-white text-center">{{obj.user_name|title}}</p>
+            </div>
+            
+            {% endfor %}
                 </div>
+            
             </div>
         </div>
-
-        {% endfor %}
+       
+        
         
     </div>
 

@@ -6,7 +6,7 @@ from .forms import ProfilesForm
 from django.db.models import Q
 def profile_add(request):
     accounts_number = Profiles.objects.filter(Q(user = request.user.user_profile))
-    if len(accounts_number) <= 4:
+    if len(accounts_number) <= 3:
         user = request.user.user_profile.id
         form = ProfilesForm()
         if request.method == 'POST':
