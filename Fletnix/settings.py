@@ -43,6 +43,8 @@ INSTALLED_APPS = [
     
     'Fletnix.apps.core',
     'Fletnix.apps.movies',
+    'Fletnix.apps.accounts',
+    'Fletnix.apps.profiles',
 ]
 
 MIDDLEWARE = [

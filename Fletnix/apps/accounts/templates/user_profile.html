@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+
+
+{% block main %}
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="card mt-5">
+                    <div class="card-body">                        
+                        <form action="{% url 'user_profile:profile_update' %}" method="post">
+                            {% csrf_token %}
+                            <input type="text" name="user" id="id_user" hidden value="{{request.user.id}}">
+                            <div class="row mt-1">
+                                <div class="col-12">
+                                    <label for="">Language Selection</label>
+                                    <select name="user_language" id="id_user_language" class="form-control">
+                                        {% if user.user_language == '?language=en-US' %}
+                                        <option value="?language=en-US" selected>English</option>
+                                        <option value="?language=pt-BR">Portugues</option>
+                                        {% else %}
+                                        <option value="?language=en-US" >English</option>
+                                        <option value="?language=pt-BR" selected>Portugues</option>
+                                        {% endif %}
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="mt-3">
+                                    <div class="form-control">
+                                        <button class="btn btn-success" type="submit
+                                        ">Save</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="card mt-5">
+                    <div class="card-body">                        
+                        <div class="row justify-content-center">
+                            <div class="col-12">
+                                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#profileAdd">
+                                    New Profile</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {% for obj in request.user.user_profile.profiles.all  %}
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="card mt-5">
+                    <div class="card-body">                        
+                        <div class="row justify-content-center">
+                            {{obj.user_name}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {% endfor %}
+        
+    </div>
+
+    
+   
+        
+    {% include 'profile_add.html' %}
+{% endblock main %}
+

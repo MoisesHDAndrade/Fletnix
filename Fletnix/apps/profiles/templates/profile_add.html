@@ -1,0 +1,67 @@
+<div class="modal fade" id="profileAdd" tabindex="-1" role="dialog" aria-labelledby="profileAddLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title font-weight-light" id="ModalCenterTitle"><strong>Profile</strong> <span class="text-muted">Form</span></h4>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                
+            </div>
+            <!-- user = form.cleaned_data['user'],
+                 user_name = form.cleaned_data['user_name'],
+                 user_age = form.cleaned_data['user_age'],
+                 user_gender = form.cleaned_data['user_gender'] -->
+            <div class="modal-body">
+                <form action="{% url 'profiles:add' %}" method="post" id="profileAddForm">
+                    {% csrf_token %}
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="form-group mb-3">
+                                <label for="id_user_name" class="font-weight-light">Profile Name</label>
+                                <input type="text" autofocus class="form-control" id="id_user_name"  name="user_name" placeholder="Enter Profile Name">
+                                <input type="text" hidden id="id_user"  name="user" value="{{request.user.user_profile.id}}">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="form-group mb-3">
+                                <label for="id_user_age" class="font-weight-light">Profile type age</label>
+                                <select id="id_user_age"  name="user_age" class="form-control">
+                                    <option value="1">Adult</option>
+                                    <option value="2">Child</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="form-group mb-3">
+                                <label for="id_user_gender" class="font-weight-light">Profile gender</label>
+                                <select id="id_user_gender"  name="user_gender" class="form-control">
+                                    <option value="1">Male</option>
+                                    <option value="2">Female</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn bg-danger text-light font-weight-light" data-bs-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-outline-success font-weight-light" onclick="submitprofileAddForm()">Save changes</button>
+            </div>
+    </div>
+</div>
+
+<script>
+    function submitprofileAddForm(){
+        document.getElementById("profileAddForm").submit()  
+      }
+
+   
+
+   
+
+</script>

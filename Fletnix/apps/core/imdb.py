@@ -1,51 +1,7 @@
 from bs4 import BeautifulSoup as bs
 import requests
 
-# def get_cover(obj):
-#     imagem = ''
-#     res = dict()
-#     headers = {'User-Agent': 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:52.0) Gecko/20100101 Firefox/52.0'}
-#     url = obj
-#     page = requests.get(url, headers=headers)
-#     soup = bs(page.text, 'html.parser')
-#     title = ''
-#     if soup.find(class_="title_wrapper",attrs="H1") != None:
-#         title = soup.find(class_="title_wrapper",attrs="H1")
-    
-#     summary = ''
-#     if soup.find(class_="summary_text") != None:
-#         summary = soup.find(class_="summary_text").text
-    
-#     subtext = ''
-#     if soup.find(class_="subtext") != None:
-#         subtext = soup.find(class_="subtext")
 
-#     genre = subtext.findChildren("a", recursive = False)
-
-#     stars = ''
-#     if soup.find('span', attrs = {'itemprop':'ratingValue'}) != None:
-#         stars = soup.find('span', attrs = {'itemprop':'ratingValue'}).text
-#     img = soup.find(class_="poster", attrs='img')
-  
-#     genre_list = []
-#     for item in genre:
-#         genre_list.append(item.text)
-#     if img:
-#         imagem = img.img.get('src')
-
-#     res = {'title':title.h1.text, 'img': imagem, 'stars':stars, 'genre':genre_list[0:-1], 'summary':summary}
-    
-#     return res
-
-# def search_imdb(search):
-#     headers = {'User-Agent': 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:52.0) Gecko/20100101 Firefox/52.0'}
-#     url = f'https://www.imdb.com/find?q={search}&s=tt&ref_=fn_al_tt_mr'
-#     page = requests.get(url, headers=headers)
-#     soup = bs(page.text, 'html.parser')
-#     td = soup.find_all(class_="result_text",attrs='href')
-#     results = (item for item in td)
-
-#     return results
 
 def get_cover(obj):
     imagem = ''
@@ -119,15 +75,14 @@ def get_cover(obj):
         'actors':actors}
     
     return res
-def search_imdb(url_string):
-	headers = {'User-Agent': 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:52.0) Gecko/20100101 Firefox/52.0'}
-	url = f'https://www.themoviedb.org/search?query={url_string}'
-	result = dict()
-	page = requests.get(url, headers = headers)
-	soup = bs(page.text, 'html.parser')
-    
-	result_div = soup.find_all(class_="card v4 tight")
-	results = (item for item in result_div)
-	# print(soup.find_all("img", class_="poster")[0].get('src'))
-    
-	return results
+def search_imdb(url_string, language):
+    headers = {'User-Agent': 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:52.0) Gecko/20100101 Firefox/52.0'}
+    url = f'https://www.themoviedb.org/search{language}&query={url_string}'
+    print(url)
+    result = dict()
+    page = requests.get(url, headers = headers)
+    soup = bs(page.text, 'html.parser')
+
+    result_div = soup.find_all(class_="card v4 tight")
+    results = (item for item in result_div)
+    return results

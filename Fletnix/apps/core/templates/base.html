@@ -57,14 +57,29 @@
                 <li><a class="dropdown-item  bg-transparent text-light" href="{% url 'movies:searcher' %}">Add a new movie to library</a></li>
               </ul>
             </li>
+            
           </ul>
-          <form class="d-flex" method="GET" action="{% url 'movies:library_search' %}">
+          <form class="d-flex mr-3" method="GET" action="{% url 'movies:library_search' %}">
             <input id="movie-scraper" class="form-control mr-e text-white"  type="search" style="background-color:#18191c;"
             name="search" autocomplete="off" placeholder="Search" aria-label="Search"><span><i  id="search-icon" class="fa fa-search mr-2 fa-2x" ></i></span>
           </form>
+          <ul class="navbar-nav ml-3">
+            <li class="nav-item ">
+              <a href="" class=" nav-link dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                {{request.user.first_name}}
+            </a>
+              <ul class="dropdown-menu dropdown-menu-end bg-transparent">
+                <li><a class="dropdown-item text-light bg-transparent" href="{% url 'user_profile:profile_detail' %}">Account</a></li>
+               
+              </ul>
+            </li>
+          </ul>
         </div>
       </div>
     </nav>
+    <div class="container-fluid">
+      {% include 'includes/_messages.html' %}
+    </div>
     {% block main %}{% endblock main %}
     {% block js %}{% endblock js %}
     <script>

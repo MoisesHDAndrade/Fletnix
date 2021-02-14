@@ -33,6 +33,7 @@ class MovieIndexView(ListView):
         context = super().get_context_data()
         context['recents'] = Movies.objects.all().order_by('-id')[:7]
         
+        
         return context
 
 class MovieSearchView(MovieIndexView):
@@ -61,10 +62,11 @@ def movie_searcher(request):
     lista = []
     if request.method =='POST':
         search = request.POST.get('search')
-        res = search_imdb(search)
+        res = search_imdb(search, request.user.user_profile.user_language)
     for item in res:
         # print(item.find("img", class_="poster"))
         sliced = str(item.img).split('"')
+        print(sliced)
         imagem = ''
         if len(sliced) > 1:
             imagem = sliced[7]
@@ -118,28 +120,3 @@ def movie_add(request):
             print('form nao foi valido')
     return render(request, 'movie_info.html', {'form':form})
 
-
-
-
-############# Scraping do IMDB ####################
-
-
-# def movie_searcher(request):
-#     search = ''
-#     dicionario = dict()
-#     global lista
-#     lista = []
-#     if request.method =='POST':
-#         search = request.POST.get('search')
-#     res = search_imdb(search)
-#     for item in res:
-#         dicionario = {'link':item.a.get('href'), 'text':item.text}
-#         lista.append(dicionario)
-#     return render(request, 'index.html', {'res':lista})
-
-
-# def movie_info(request,pk):
-#     global lista
-#     res = lista[pk -1]
-#     movie = get_cover(f"https://www.imdb.com/{res.get('link')}")
-#     return render(request, 'search_movie.html',{'res':movie})
