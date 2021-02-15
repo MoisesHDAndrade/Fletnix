@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-
+{% load static %}
 
 {% block css %}
     <style>
@@ -39,72 +39,57 @@
 {% endblock css %}
     
 {% block main %}
-    <div class="container-fluid">
-        <div class="row justify-content-center">
-            <div class="col-lg-8">
-                <div class="card mt-5">
-                    <div class="card-body">                        
-                        <form action="{% url 'user_profile:profile_update' %}" method="post">
-                            {% csrf_token %}
-                            <input type="text" name="user" id="id_user" hidden value="{{request.user.id}}">
-                            <div class="row mt-1">
-                                <div class="col-12">
-                                    <label for="">Language Selection</label>
-                                    <select name="user_language" id="id_user_language" class="form-control">
-                                        {% if user.user_language == '?language=en-US' %}
-                                        <option value="?language=en-US" selected>English</option>
-                                        <option value="?language=pt-BR">Portugues</option>
-                                        {% else %}
-                                        <option value="?language=en-US" >English</option>
-                                        <option value="?language=pt-BR" selected>Portugues</option>
-                                        {% endif %}
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="mt-3">
-                                    <div class="form-control">
-                                        <button class="btn btn-success" type="submit
-                                        ">Save</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        
+    <div class="container-fluid mt-5 mb-auto">
 
         <div class="row justify-content-center mt-2">
+            
+            {% if request.user.user_profile.profiles.count <= 3 %}
             <div class="col-2 text-center mb-3 mt-3">
-                <button class="btn bg-white" data-bs-toggle="modal" data-bs-target="#profileAdd">
-                    New Profile</button>
+                <button class="btn bg-white" data-bs-toggle="modal" data-bs-target="#profileAdd">New Profile</button>
             </div>
+            {% endif %}
+                
+            
            
-            <h3 class="text-white text-center mb-3">Manage Profiles:</h3>
+            <h1 class="text-white text-center mb-3">Manage Profiles:</h1>
             <div class="col-8">
                 <div class="row">
                     {% for obj in request.user.user_profile.profiles.all  %}
             <div class="col-lg-3 col-md-12">
-                <div class="card" style="width: 15rem;background-color:pink">
+                <div class="card" >
                     <!-- testando avatars para profiles -->
-                    <img src="https://cdn0.iconfinder.com/data/icons/child-1-1/70/baby-child-girl-512.png" class="card-img-top" height="150" alt="...">
+                    
+                    {% if obj.user_avatar == 'avatar1' %}
+                    <img src="{%static 'img/avatar1.png'%}" class="card-img-top" height="150" alt="...">
+                    {% elif obj.user_avatar == 'avatar2' %}
+                    <img src="{%static 'img/avatar2.png'%}" class="card-img-top" height="150" alt="...">
+                    {% elif obj.user_avatar == 'avatar3' %}
+                    <img src="{%static 'img/avatar3.png'%}" class="card-img-top" height="150" alt="...">
+                    {% elif obj.user_avatar == 'avatar4' %}
+                    <img src="{%static 'img/avatar4.png'%}" class="card-img-top" height="150" alt="...">
+                    {% elif obj.user_avatar == 'avatar5' %}
+                    <img src="{%static 'img/avatar5.png'%}" class="card-img-top" height="150" alt="...">
+                    {% elif obj.user_avatar == 'avatar6' %}
+                    <img src="{%static 'img/avatar6.png'%}" class="card-img-top" height="150" alt="...">
+                    {% elif obj.user_avatar == 'avatar7' %}
+                    <img src="{%static 'img/avatar7.png'%}" class="card-img-top" height="150" alt="...">
+                    {% elif obj.user_avatar == 'avatar8' %}
+                    <img src="{%static 'img/avatar8.png'%}" class="card-img-top" height="150" alt="...">
+                    {% elif obj.user_avatar == 'avatar9' %}
+                    <img src="{%static 'img/avatar9.png'%}" class="card-img-top" height="150" alt="...">
+                    {% endif %}
+                        
+                    
                     <a href="" class="text-decoration-none">
                         <div class="card-img-overlay">
                           
                             <p class="card-text text-white text-center  mt-5 mb-auto"><i class="fas fa-pen-alt"></i></p>
                             <p class="card-text text-white text-center  mb-auto">Edit</p>
                             
-                            
                         </div>
                     </a>
-                        
-                      
-                    
                   </div>
-                  <p class="text-white text-center">{{obj.user_name|title}}</p>
+                  <p class="text-white text-center mt-2 fs-5">{{obj.user_name|title}}</p>
             </div>
             
             {% endfor %}
@@ -112,14 +97,9 @@
             
             </div>
         </div>
-       
-        
-        
+   
     </div>
 
-    
-   
-        
     {% include 'profile_add.html' %}
 {% endblock main %}
 

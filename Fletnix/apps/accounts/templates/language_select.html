@@ -1,0 +1,48 @@
+<div class="modal fade" id="languageSelect" tabindex="-1" role="dialog" aria-labelledby="languageSelectLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg bg-transparent" role="document">
+        <div class="modal-content bg-dark text-white">
+            <div class="modal-header">
+              <h4 class="modal-title font-weight-light" id="ModalCenterTitle"><strong>Language</strong> <span class="text-muted">Settings</span></h4>
+              <button type="button" class="btn-close text-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                
+            </div>
+           
+            <div class="modal-body">
+                <form action="{% url 'user_profile:profile_update' %}" method="post" id="languageSelectForm">
+                    {% csrf_token %}
+                    <input type="text" name="user" id="id_user" hidden value="{{request.user.id}}">
+                    <div class="row mt-1">
+                        <div class="col-12">
+                            
+                            <select name="user_language" id="id_user_language" class="form-control bg-dark text-white">
+                                {% if user.user_language == '?language=en-US' %}
+                                <option value="?language=en-US" selected>English</option>
+                                <option value="?language=pt-BR">Portugues</option>
+                                {% else %}
+                                <option value="?language=en-US" >English</option>
+                                <option value="?language=pt-BR" selected>Portugues</option>
+                                {% endif %}
+                            </select>
+                        </div>
+                    </div>
+                    
+                </form>
+            </div>
+            <div class="modal-footer">
+            <button type="button" class="btn btn-light font-weight-light" onclick="submitlanguageSelectForm()">Save changes</button>
+              <button type="button" class="btn btn-outline-light   font-weight-light" data-bs-dismiss="modal">Cancel</button>
+              
+            </div>
+    </div>
+    </div>
+</div>
+<script>
+    function submitlanguageSelectForm(){
+        document.getElementById("languageSelectForm").submit()  
+      }
+
+   
+
+   
+
+</script>

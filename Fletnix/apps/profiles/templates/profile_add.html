@@ -1,3 +1,12 @@
+{% load static %}
+
+
+{% block css %}
+    <style>
+       
+    </style>
+{% endblock css %}
+    
 <div class="modal fade" id="profileAdd" tabindex="-1" role="dialog" aria-labelledby="profileAddLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg bg-transparent" role="document">
         <div class="modal-content bg-dark text-white">
@@ -6,10 +15,6 @@
               <button type="button" class="btn-close text-white" data-bs-dismiss="modal" aria-label="Close"></button>
                 
             </div>
-            <!-- user = form.cleaned_data['user'],
-                 user_name = form.cleaned_data['user_name'],
-                 user_age = form.cleaned_data['user_age'],
-                 user_gender = form.cleaned_data['user_gender'] -->
             <div class="modal-body">
                 <form action="{% url 'profiles:add' %}" method="post" id="profileAddForm">
                     {% csrf_token %}
@@ -46,13 +51,35 @@
                             </div>
                         </div>
                     </div>
+
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="form-group mb-3">
+                                <label for="id_user_avatar" class="font-weight-light">Avatar</label>
+                                <select id="id_user_avatar"  name="user_avatar" class="form-control bg-dark text-white">
+                                    <option data-img-src="{%static 'img/avatar1.png'%}" width="50" value='avatar1'></option>
+                                    <option data-img-src="{%static 'img/avatar2.png'%}" value='avatar2'></option>
+                                    <option data-img-src="{%static 'img/avatar3.png'%}" value='avatar3'></option>
+                                    <option data-img-src="{%static 'img/avatar4.png'%}" value='avatar4'></option>
+                                    <option data-img-src="{%static 'img/avatar5.png'%}" value='avatar5'></option>
+                                    <option data-img-src="{%static 'img/avatar6.png'%}" value='avatar6'></option>
+                                    <option data-img-src="{%static 'img/avatar7.png'%}" value='avatar7'></option>
+                                    <option data-img-src="{%static 'img/avatar8.png'%}" value='avatar8'></option>
+                                    <option data-img-src="{%static 'img/avatar9.png'%}" value='avatar9'></option>
+                                    
+                                </select>
+                            </div>
+                        </div>
+                    </div>
                 </form>
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn bg-danger text-light font-weight-light" data-bs-dismiss="modal">Close</button>
-              <button type="button" class="btn bg-white font-weight-light" onclick="submitprofileAddForm()">Save changes</button>
+            <button type="button" class="btn btn-light font-weight-light" onclick="submitprofileAddForm()">Save changes</button>
+              <button type="button" class="btn btn-outline-light   font-weight-light" data-bs-dismiss="modal">Cancel</button>
+              
             </div>
     </div>
+</div>
 </div>
 
 <script>
@@ -60,8 +87,13 @@
         document.getElementById("profileAddForm").submit()  
       }
 
-   
-
-   
-
+      
 </script>
+
+
+{% block js %}
+    <script>
+        $("#id_user_avatar").imagepicker()
+    </script>
+{% endblock js %}
+    

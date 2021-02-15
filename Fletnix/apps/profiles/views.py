@@ -16,7 +16,8 @@ def profile_add(request):
                     user = form.cleaned_data['user'],
                     user_name = form.cleaned_data['user_name'],
                     user_age = form.cleaned_data['user_age'],
-                    user_gender = form.cleaned_data['user_gender']
+                    user_gender = form.cleaned_data['user_gender'],
+                    user_avatar = form.cleaned_data['user_avatar']
                 )
                 data_from_form.save()
                 messages.success(request, f'A new profile {data_from_form.user_name} was created')
