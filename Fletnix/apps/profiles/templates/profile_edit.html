@@ -1,0 +1,97 @@
+{% extends 'base.html' %}
+
+{% load static %}
+{% block main %}
+    <div class="container-fluid mt-3">
+        <div class="row justify-content-center">
+            <div class="col-8">
+                <div class="card">
+                    <div class="card-body">
+                        
+                        <form action="{% url 'profiles:edit' obj.id %}" method="post" id="profileAddForm">
+                            {% csrf_token %}
+                            <div class="row">
+                                <div class="col-12 ">
+                                    <div class="form-group mb-3">
+                                        <label for="id_user_name" class="font-weight-light">Profile Name</label>
+                                        <input type="text" autofocus class="form-control " id="id_user_name"  name="user_name" value="{{obj.user_name}}">
+                                        <input type="text" hidden id="id_user"  name="user" value="{{request.user.user_profile.id}}">
+                                    </div>
+                                </div>
+                            </div>
+        
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="form-group mb-3">
+                                        <label for="id_user_age" class="font-weight-light">Profile type age</label>
+                                        <select id="id_user_age"  name="user_age" class="form-control ">
+                                            
+                                            {% if obj.user_age == '1' %}
+                                            <option value="1" selected>Adult</option>
+                                            <option value="2">Child</option>
+                                            {% else %}
+                                            <option value="1">Adult</option>
+                                            <option value="2" selected>Child</option>
+                                            {% endif %}
+                                                
+                                           
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+        
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="form-group mb-3">
+                                        <label for="id_user_gender" class="font-weight-light">Profile gender</label>
+                                        <select id="id_user_gender"  name="user_gender" class="form-control ">
+                                            
+                                            {% if obj.user_gender == '1' %}
+                                            <option value="1" selected>Male</option>
+                                            <option value="2">Female</option>
+                                            {% else %}
+                                            <option value="1">Male</option>
+                                            <option value="2" selected>Female</option>
+                                            {% endif %}
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+        
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="form-group mb-3">
+                                        <label for="id_user_avatar" class="font-weight-light">Avatar</label>
+                                        <select id="id_user_avatar"  name="user_avatar" class="form-control ">
+                                            <option data-img-src="{%static 'img/avatar1.png'%}" {% if obj.user_avatar == 'avatar1' %}selected{% endif %} value='avatar1'></option>
+                                            <option data-img-src="{%static 'img/avatar2.png'%}" {% if obj.user_avatar == 'avatar2' %}selected{% endif %} value='avatar2'></option>
+                                            <option data-img-src="{%static 'img/avatar3.png'%}" {% if obj.user_avatar == 'avatar3' %}selected{% endif %} value='avatar3'></option>
+                                            <option data-img-src="{%static 'img/avatar4.png'%}" {% if obj.user_avatar == 'avatar4' %}selected{% endif %} value='avatar4'></option>
+                                            <option data-img-src="{%static 'img/avatar5.png'%}" {% if obj.user_avatar == 'avatar5' %}selected{% endif %} value='avatar5'></option>
+                                            <option data-img-src="{%static 'img/avatar6.png'%}" {% if obj.user_avatar == 'avatar6' %}selected{% endif %} value='avatar6'></option>
+                                            <option data-img-src="{%static 'img/avatar7.png'%}" {% if obj.user_avatar == 'avatar7' %}selected{% endif %} value='avatar7'></option>
+                                            <option data-img-src="{%static 'img/avatar8.png'%}" {% if obj.user_avatar == 'avatar8' %}selected{% endif %} value='avatar8'></option>
+                                            <option data-img-src="{%static 'img/avatar9.png'%}" {% if obj.user_avatar == 'avatar9' %}selected{% endif %} value='avatar9'></option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row justify-content-center">
+                                <div class="col-8 text-center">
+                                    <button class="btn btn-outline-secondary" type="submit">Save</button>
+                                </div>
+                                
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock main %}
+
+{% block js %}
+    <script>
+        $("#id_user_avatar").imagepicker()
+    </script>
+{% endblock js %}

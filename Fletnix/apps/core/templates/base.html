@@ -68,10 +68,62 @@
           </form>
           <ul class="navbar-nav ml-3">
             <li class="nav-item ">
-              <a href="" class=" nav-link dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                {{request.user.first_name}}
-            </a>
+              <a href="" class=" nav-link dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">         
+              {% for obj in request.user.user_profile.profiles.all  %}
+                {% if obj.profile_watching.first  %}
+                {% if obj.user_avatar == 'avatar1' %}
+                <img src="{%static 'img/avatar1.png'%}" class="card-img-top" style="width: 30px;"  alt="...">
+                {% elif obj.user_avatar == 'avatar2' %}
+                <img src="{%static 'img/avatar2.png'%}" class="card-img-top" style="width: 30px;"  alt="...">
+                {% elif obj.user_avatar == 'avatar3' %}
+                <img src="{%static 'img/avatar3.png'%}" class="card-img-top" style="width: 30px;"  alt="...">
+                {% elif obj.user_avatar == 'avatar4' %}
+                <img src="{%static 'img/avatar4.png'%}" class="card-img-top" style="width: 30px;"  alt="...">
+                {% elif obj.user_avatar == 'avatar5' %}
+                <img src="{%static 'img/avatar5.png'%}" class="card-img-top" style="width: 30px;"  alt="...">
+                {% elif obj.user_avatar == 'avatar6' %}
+                <img src="{%static 'img/avatar6.png'%}" class="card-img-top" style="width: 30px;"   alt="...">
+                {% elif obj.user_avatar == 'avatar7' %}
+                <img src="{%static 'img/avatar7.png'%}" class="card-img-top" style="width: 30px;"  alt="...">
+                {% elif obj.user_avatar == 'avatar8' %}
+                <img src="{%static 'img/avatar8.png'%}" class="card-img-top" style="width: 30px;"  alt="...">
+                {% elif obj.user_avatar == 'avatar9' %}
+                <img src="{%static 'img/avatar9.png'%}" class="card-img-top" style="width: 30px;"  alt="...">
+                {% endif %} 
+                {% endif %} 
+              {% endfor %}
+              </a>
+            
               <ul class="dropdown-menu dropdown-menu-end bg-transparent">
+                
+                {% for obj in request.user.user_profile.profiles.all  %}
+                
+                {% if not obj.profile_watching.first%}
+               
+                <li><a class="dropdown-item text-light bg-transparent" href="{% url 'profiles:switcher' obj.id %}"><img src="" alt=""> {% if obj.user_avatar == 'avatar1' %}
+                  <img src="{%static 'img/avatar1.png'%}" class="card-img-top" style="width: 30px;"  alt="...">
+                  {% elif obj.user_avatar == 'avatar2' %}
+                  <img src="{%static 'img/avatar2.png'%}" class="card-img-top" style="width: 30px;"  alt="...">
+                  {% elif obj.user_avatar == 'avatar3' %}
+                  <img src="{%static 'img/avatar3.png'%}" class="card-img-top" style="width: 30px;"  alt="...">
+                  {% elif obj.user_avatar == 'avatar4' %}
+                  <img src="{%static 'img/avatar4.png'%}" class="card-img-top" style="width: 30px;"  alt="...">
+                  {% elif obj.user_avatar == 'avatar5' %}
+                  <img src="{%static 'img/avatar5.png'%}" class="card-img-top" style="width: 30px;"  alt="...">
+                  {% elif obj.user_avatar == 'avatar6' %}
+                  <img src="{%static 'img/avatar6.png'%}" class="card-img-top" style="width: 30px;"   alt="...">
+                  {% elif obj.user_avatar == 'avatar7' %}
+                  <img src="{%static 'img/avatar7.png'%}" class="card-img-top" style="width: 30px;"  alt="...">
+                  {% elif obj.user_avatar == 'avatar8' %}
+                  <img src="{%static 'img/avatar8.png'%}" class="card-img-top" style="width: 30px;"  alt="...">
+                  {% elif obj.user_avatar == 'avatar9' %}
+                  <img src="{%static 'img/avatar9.png'%}" class="card-img-top" style="width: 30px;"  alt="...">
+                  {% endif %} {{obj}}</a></li>
+                {% endif %}
+                  
+                
+                {% endfor %}
+                <div class="dropdown-divider bg-white"></div>
                 <li><a class="dropdown-item text-light bg-transparent" href="{% url 'user_profile:profile_detail' %}">Manage Profiles</a></li>
                 <div class="dropdown-divider bg-white"></div>
                 <li><a class="dropdown-item text-light bg-transparent" href="" data-bs-toggle="modal" data-bs-target="#languageSelect">Language</a></li>
@@ -83,6 +135,7 @@
       </div>
     </nav>
     <div class="container-fluid">
+      
       {% include 'includes/_messages.html' %}
     </div>
     {% include 'language_select.html' %}

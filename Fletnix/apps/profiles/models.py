@@ -1,4 +1,5 @@
 from django.db import models
+from django.db.models.deletion import DO_NOTHING
 from Fletnix.apps.accounts.models import UserProfile
 
 class Profiles(models.Model):
@@ -49,3 +50,12 @@ class Profiles(models.Model):
 
     def __str__(self):
         return self.user_name
+
+
+class WhoIsWatching(models.Model):
+    person = models.ForeignKey(Profiles, on_delete=DO_NOTHING, related_name='profile_watching')
+    person_avatar = models.CharField(max_length=50, null=True)
+    person_age = models.CharField(max_length=30, null=True)
+
+    def __str__(self):
+        return str(self.person)

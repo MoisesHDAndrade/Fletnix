@@ -1,9 +1,11 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from Fletnix.apps.accounts.models import UserProfile
-from .models import Profiles
-from .forms import ProfilesForm
+from .models import Profiles, WhoIsWatching
+from .forms import ProfilesForm, WhoIsWatchinForm
 from django.db.models import Q
+
+
 def profile_add(request):
     accounts_number = Profiles.objects.filter(Q(user = request.user.user_profile))
     if len(accounts_number) <= 3:
@@ -25,3 +27,32 @@ def profile_add(request):
     else:
         messages.error(request, 'Maximum number of profiles reached')
         return redirect('user_profile:profile_detail')
+
+def profiles_edit(request, pk):
+    profile = get_object_or_404(Profiles, pk = pk)
+    form = ProfilesForm(request.POST or None, instance=profile)
+    if request.method == 'POST' and form.is_valid():
+        profile.save()
+        messages.success(request, f'Profile {profile.user_name} was updated with success')
+        return redirect('user_profile:profile_detail')
+    return render(request, 'profile_edit.html', {'obj':profile})
+
+def who_is_watching(request, pk):
+    profile = get_object_or_404(Profiles, pk = pk)
+    obj = WhoIsWatching.objects.all()
+    
+    if not obj:
+        print('nao tem obj vou criar')
+        obj = WhoIsWatching.objects.create(person = profile, person_avatar = profile.user_avatar, person_age = profile.user_age)
+        return redirect('movies:index')
+    else:
+        print('else')
+        obj = WhoIsWatching.objects.first()
+        obj.person = profile
+        obj.person_avatar = profile.user_avatar
+        obj.person_age = profile.user_age
+        obj.save()
+       
+        return redirect('movies:index')
+    
+    

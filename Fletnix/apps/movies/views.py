@@ -6,6 +6,7 @@ from django.db.models import Q
 from rest_framework import generics
 
 from Fletnix.apps.core.imdb import search_imdb, get_cover
+from Fletnix.apps.profiles.models import WhoIsWatching
 from .models import Movies
 from .forms import MoviesForm
 from .serializers import MoviesSerializer
@@ -32,8 +33,7 @@ class MovieIndexView(ListView):
     def get_context_data(self):
         context = super().get_context_data()
         context['recents'] = Movies.objects.all().order_by('-id')[:7]
-        
-        
+        context['watching'] = WhoIsWatching.objects.first()
         return context
 
 class MovieSearchView(MovieIndexView):
