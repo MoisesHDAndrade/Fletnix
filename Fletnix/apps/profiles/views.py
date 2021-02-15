@@ -46,7 +46,7 @@ def who_is_watching(request, pk):
         obj = WhoIsWatching.objects.create(person = profile, person_avatar = profile.user_avatar, person_age = profile.user_age)
         return redirect('movies:index')
     else:
-        print('else')
+        
         obj = WhoIsWatching.objects.first()
         obj.person = profile
         obj.person_avatar = profile.user_avatar

@@ -7,7 +7,8 @@ from .forms import UserProfileForm
 
 def register(request):
     if request.user.is_authenticated:
-        return redirect('accounts:detail')
+        # return redirect('accounts:detail')
+        print('esta autenticado')
     if request.method !='POST':
         return render(request, 'register.html')
 
@@ -46,7 +47,9 @@ def register(request):
     except:
         messages.error(request, 'Invalid Email')
         return render(request, 'register.html')
-
+        
+# def login(request):
+#     return render(request, 'l')
 def profile_detail(request):
     user = request.user.user_profile
     return render(request, 'user_profile.html', {'user':user})

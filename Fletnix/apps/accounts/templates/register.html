@@ -1,0 +1,118 @@
+{% extends 'base.html' %}
+
+{% block css %}
+    <style>
+        body{
+            background-image: url(https://bit.ly/2E3scwW);
+            background-repeat: no-repeat;
+            background-position: center center;
+            background-size: cover;
+            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+            background-color: gray;
+            background-blend-mode: multiply;
+            width:100vw;
+            height:100vh;
+        }
+        .container-fluid {
+            position: relative;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            
+            
+        }
+       .card{
+        display: flex;
+        width:30em;
+        background: rgba(000, 000, 000, 0.75);
+        border-radius: 4px;
+        flex-direction: column;
+        padding: 60px 68px 40px;
+       }
+       
+       
+            input{
+            width: 100%;
+            position: relative;
+            z-index: 100;
+            background: #333;
+            margin-bottom: 20px;
+            border-radius: 4px;
+            border: none;
+            opacity: 1;
+            font-size: 1rem;
+            color: white;
+            line-height: 50px;
+            padding: 12px 18px 0;
+            }
+            
+    </style>
+{% endblock css %}
+    
+{% block main %}
+    <div class="container-fluid mt-5">
+        <div class="row justify-content-center">
+            <div class="col-12">
+                <div class="card ">
+                    <div class="card-body bg-transparent text-light ">
+                        <form action="">
+                            <div class="col-12">
+                                <div class="row mb-1">
+                                    <h2>Register</h2>
+                                </div>
+                                    <div class="row form-floating">
+                                        <input type="text" id="id_first_name" name="first_name" class="form-control " placeholder="name" >
+                                        <label for="id_first_name">First Name</label>
+                                    </div> 
+                             
+                               
+                                    <div class="row form-floating">
+                                        <input type="text" id="id_last_name" class="form-control "  >
+                                        <label for="id_last_name" name="last_name" class="text-dark">Last Name</label>
+                                    </div> 
+                                
+                                
+                                
+                                    <div class="row form-floating">
+                                        <input type="text" id="id_username" class="form-control "  >
+                                        <label for="id_username" class="text-dark">Last Name</label>
+                                    </div> 
+                               
+                                
+                               
+                                    <div class="row form-floating">
+                                        <input type="email" id="id_email" class="form-control "  >
+                                        <label for="id_email" class="text-dark">Last Name</label>
+                                    </div> 
+                               
+                                
+                                
+                                    <div class="row form-floating">
+                                        <input type="password" id="id_password" class="form-control "  >
+                                        <label for="id_password" class="text-dark">Last Name</label>
+                                    </div> 
+                                
+
+                                <div class="row form-floating">
+                                    <input type="password" id="id_confirm_password" class="form-control "  >
+                                    <label for="id_confirm_password" class="text-dark">Last Name</label>
+                                </div>
+                                <div class="row">
+                                    <button class="btn btn-danger btn-lg" style="background-color:#cc5353">Register</button>
+                                </div> 
+                                <div class="row justify-content-between mt-2">
+                                    <div class="col"><a href="" class="text-decoration-none text-light">I have an account</a></div>
+                                    <div class="col"><a href="" class="text-decoration-none text-light">Forgot Passoword</a></div>
+                                    
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+{% endblock main %}
+    

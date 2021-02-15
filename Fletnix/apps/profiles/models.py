@@ -53,7 +53,7 @@ class Profiles(models.Model):
 
 
 class WhoIsWatching(models.Model):
-    person = models.ForeignKey(Profiles, on_delete=DO_NOTHING, related_name='profile_watching')
+    person = models.ForeignKey(Profiles, on_delete=models.CASCADE, related_name='profile_watching')
     person_avatar = models.CharField(max_length=50, null=True)
     person_age = models.CharField(max_length=30, null=True)
 
