@@ -48,8 +48,9 @@ def register(request):
         messages.error(request, 'Invalid Email')
         return render(request, 'register.html')
         
-# def login(request):
-#     return render(request, 'l')
+def login(request):
+    return render(request, 'login.html')
+
 def profile_detail(request):
     user = request.user.user_profile
     return render(request, 'user_profile.html', {'user':user})
