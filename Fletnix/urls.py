@@ -15,7 +15,8 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-
+from django.conf import settings
+from django.conf.urls.static import static
 urlpatterns = [
     path('', include('Fletnix.apps.movies.urls')),
     path('core/', include('Fletnix.apps.core.urls')),
@@ -23,4 +24,4 @@ urlpatterns = [
     path('profiles/', include('Fletnix.apps.profiles.urls')),
     path('api/', include('rest_framework.urls')),
     path('admin/', admin.site.urls),
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
