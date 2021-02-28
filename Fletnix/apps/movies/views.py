@@ -2,7 +2,7 @@ from django.shortcuts import render,redirect, get_object_or_404
 from django.views.generic import ListView
 from django.contrib import messages
 from django.db.models import Q
-
+from django.core.files import File
 from rest_framework import generics
 
 from Fletnix.apps.core.imdb import search_imdb, get_cover
@@ -13,6 +13,8 @@ from .serializers import MoviesSerializer
 
 from bs4 import BeautifulSoup as bs
 import requests
+from urllib import request as req
+from tempfile import NamedTemporaryFile
 
 lista = []
 
@@ -30,9 +32,17 @@ class MovieIndexView(ListView):
     template_name = 'index_movie.html'
     paginate_by = 12
 
+    def get_queryset(self):
+        qs = super().get_queryset()
+        qs = qs.filter(user = self.request.user)
+        if not qs:
+            return qs
+        return qs
+
+
     def get_context_data(self):
         context = super().get_context_data()
-        context['recents'] = Movies.objects.all().order_by('-id')[:7]
+        context['recents'] = Movies.objects.filter(user = self.request.user).order_by('-id')[:7]
         context['watching'] = WhoIsWatching.objects.first()
         return context
 
@@ -66,7 +76,6 @@ def movie_searcher(request):
     for item in res:
         # print(item.find("img", class_="poster"))
         sliced = str(item.img).split('"')
-        print(sliced)
         imagem = ''
         if len(sliced) > 1:
             imagem = sliced[7]
@@ -90,14 +99,13 @@ def movie_info(request,pk):
     movie = get_cover(f"https://www.themoviedb.org{res.get('link')}")
     return render(request, 'movie_info.html',{'res':movie})
 
-
 def movie_add(request):
     form = MoviesForm()
-    title_t = request.GET.get('title')
     if request.method == 'POST':
         form = MoviesForm(request.POST or None, request.FILES or None)
         if form.is_valid():
             data_from_form = Movies(
+                user = request.user,
                 title = form.cleaned_data['title'],
                 summary = form.cleaned_data['summary'],
                 year = form.cleaned_data['year'],
@@ -105,10 +113,22 @@ def movie_add(request):
                 cover = form.cleaned_data['cover'],
                 url = form.cleaned_data['url'],
                 trailer = form.cleaned_data['trailer'],
-                cast = form.cleaned_data['cast']
+                cast = form.cleaned_data['cast'],
+                image = form.cleaned_data['image'],
 
             )
+            if not data_from_form.image:
+                striped_image = str(data_from_form.cover).split('/')
+                image_url = data_from_form.cover
+                img_temp = NamedTemporaryFile(delete = True)
+                img_temp.write(req.urlopen(image_url).read())
+                img_temp.flush()
+                data_from_form.image.save(striped_image[-1], File(img_temp))
+            
             data_from_form.genre = data_from_form.genre[0:-1]
+            # if not "iframe" or not "youtube" in data_from_form.url:
+            #     data_from_form.url = "{sources: [{src:'url' ,type: 'video/mp4'}],poster: 'image'},".replace('url', data_from_form.url).replace('image', data_from_form.image.url)
+            data_from_form.user = request.user
             if not data_from_form.trailer:
                 data_from_form.trailer = 'https://www.youtube.com/watch?v=trailer'
             if not data_from_form.cast:
@@ -116,7 +136,6 @@ def movie_add(request):
             data_from_form.save()
             messages.success(request, f'Yay! "{data_from_form.title}" was added to your library')
             return redirect('movies:index')
-        else:
-            print('form nao foi valido')
+        if form.errors:
+            print(form.errors)
     return render(request, 'movie_info.html', {'form':form})
-
