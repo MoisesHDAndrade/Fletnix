@@ -60,47 +60,48 @@
             <div class="col-12">
                 <div class="card ">
                     <div class="card-body bg-transparent text-light ">
-                        <form action="">
+                        <form action=" " method="post">
+                            {% csrf_token %}
                             <div class="col-12">
                                 <div class="row mb-1">
                                     <h2>Register</h2>
                                 </div>
-                                    <div class="row form-floating">
-                                        <input type="text" id="id_first_name" name="first_name" class="form-control " placeholder="name" >
-                                        <label for="id_first_name">First Name</label>
-                                    </div> 
+                                <div class="row form-floating">
+                                    <input type="text" id="id_first_name" name="first_name" class="form-control " placeholder="name" >
+                                    <label for="id_first_name">First Name</label>
+                                </div> 
                              
                                
-                                    <div class="row form-floating">
-                                        <input type="text" id="id_last_name" class="form-control "  >
-                                        <label for="id_last_name" name="last_name" class="text-dark">Last Name</label>
-                                    </div> 
+                                <div class="row form-floating">
+                                    <input type="text" id="id_last_name" name="last_name"  class="form-control "  >
+                                    <label for="id_last_name" class="text-dark">Last Name</label>
+                                </div> 
                                 
                                 
                                 
-                                    <div class="row form-floating">
-                                        <input type="text" id="id_username" class="form-control "  >
-                                        <label for="id_username" class="text-dark">Last Name</label>
-                                    </div> 
+                                <div class="row form-floating">
+                                    <input type="text" id="id_username" name="username" class="form-control "  >
+                                    <label for="id_username" class="text-dark">Username</label>
+                                </div> 
                                
                                 
                                
-                                    <div class="row form-floating">
-                                        <input type="email" id="id_email" class="form-control "  >
-                                        <label for="id_email" class="text-dark">Last Name</label>
-                                    </div> 
+                                <div class="row form-floating">
+                                    <input type="email" id="id_email" name="email" class="form-control "  >
+                                    <label for="id_email" class="text-dark">Email</label>
+                                </div> 
                                
                                 
                                 
-                                    <div class="row form-floating">
-                                        <input type="password" id="id_password" class="form-control "  >
-                                        <label for="id_password" class="text-dark">Last Name</label>
-                                    </div> 
+                                <div class="row form-floating">
+                                    <input type="password" id="id_password" name="password" class="form-control "  >
+                                    <label for="id_password" class="text-dark">Password</label>
+                                </div> 
                                 
 
                                 <div class="row form-floating">
-                                    <input type="password" id="id_confirm_password" class="form-control "  >
-                                    <label for="id_confirm_password" class="text-dark">Last Name</label>
+                                    <input type="password" id="id_confirm_password" name="confirm_password" class="form-control "  >
+                                    <label for="id_confirm_password" class="text-dark">Confirm Password</label>
                                 </div>
                                 <div class="row">
                                     <button class="btn btn-danger btn-lg" style="background-color:#cc5353">Register</button>
@@ -124,3 +125,4 @@
 #TODO Filtrar conteudo por faixa etaria
 #TODO Terminar Register
 #TODO Criar Login view e template
+
