@@ -126,8 +126,8 @@ def movie_add(request):
                 data_from_form.image.save(striped_image[-1], File(img_temp))
             
             data_from_form.genre = data_from_form.genre[0:-1]
-            # if not "iframe" or not "youtube" in data_from_form.url:
-            #     data_from_form.url = "{sources: [{src:'url' ,type: 'video/mp4'}],poster: 'image'},".replace('url', data_from_form.url).replace('image', data_from_form.image.url)
+            if not "iframe" or not "youtube" in data_from_form.url:
+                data_from_form.url = "{sources: [{src:'url' ,type: 'video/mp4'}],poster: 'image'},".replace('url', data_from_form.url).replace('image', data_from_form.image.url)
             data_from_form.user = request.user
             if not data_from_form.trailer:
                 data_from_form.trailer = 'https://www.youtube.com/watch?v=trailer'
