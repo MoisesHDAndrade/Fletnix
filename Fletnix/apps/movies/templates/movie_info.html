@@ -19,8 +19,9 @@
             </div>
             <div class="col-md-9 ">
               <div class="card-body " >
-                <h2 class="text-light " > <strong>{{res.title}}</strong> {{res.year}}</h2>
-                <p class="text-muted">{% for item in res.genre %}{{item}}{% if not forloop.last %},{% endif %}{%endfor%}</p>
+                <h2 class="text-light " id="movie_title"> <strong>{{res.title}}</strong> {{res.year}}</h2>
+                <p class="text-muted"><span class="border border-secondary p-1" >{{res.certification}}</span>{% for item in res.genre %}{{item}}{% if not forloop.last %},{% endif %}{%endfor%}</p>
+                <p class="text-light">Relevance <span class="text-muted">{{res.relevance}}%</span></p>
                 <div class="summary">
                     <h5 class="text-light ">Summary</h5>
                     <p class="card-text text-light">{{res.summary}}</p>
@@ -41,7 +42,7 @@
               </div>
             </div>
           </div>
-          <form action="{%url 'movies:add'%}" method="post" enctype="multipart/form-data">
+          <form action="{%url 'movies:add'%}" method="post" enctype="multipart/form-data" id="movie-form">
             {% csrf_token %}
             <div class="mb-3">
                 <input type="text" class="form-control" hidden id="id_title" name="title" value="{{res.title}}" >
@@ -62,6 +63,8 @@
             </div>
             <div class="mb-3">
                 <input type="text" class="form-control" hidden id="id_genre" value="{% for item in res.genre %}{{item}}, {%endfor%}" name="genre" >
+                <input type="text" class="form-control" hidden id="id_relevance" value="{{res.relevance}}" name="relevance" >
+                <input type="text" class="form-control" hidden id="id_certification" value="{{res.certification}}" name="certification" >
             </div>
             <div class="mb-3">
                 <textarea class="form-control" id="id_cover" hidden name="cover" hidden rows="2" ></textarea>
@@ -70,6 +73,10 @@
                 <label for="id_url" class="form-label text-light">URL</label>
                 <textarea class="form-control bg-dark text-light" id="id_url" autofocus name="url"rows="1"></textarea>
             </div>
+            <!-- <div class="mb-3">
+              
+                <input type="file" class="form-control"  id="id_file" hidden name="image">
+            </div> -->
             <button class="btn btn-outline-success" type="submit">Save to Library</button>
         </form>
         </div>
@@ -79,6 +86,7 @@
 {% block js %}
 <script>
 image_url = document.getElementById("image_src")
+console.log(image_url)
 cover = document.getElementById("id_cover")
 canvas = document.getElementById('canvas')
 var width = image_url.width 
@@ -100,13 +108,23 @@ function takepicture(){
         canvas.height = height;
         context.drawImage(image_url, 0, 0, width, height);
         var data = canvas.toDataURL('image/jpg');
-        cover.innerHTML = data
+        // cover.innerHTML = data
+        cover.innerHTML = image_url.src
+        const movie_title = document.getElementById("movie_title").innerText
         
+        var preview = document.getElementById('image_src');
+        var file = document.getElementById('id_file') 
+
     } 
     else {
         clearphoto();
         }
+
+        return data;
     }
     window.addEventListener("load", takepicture, false)
+
+
+   
 </script>
 {% endblock js %}

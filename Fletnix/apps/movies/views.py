@@ -115,6 +115,8 @@ def movie_add(request):
                 trailer = form.cleaned_data['trailer'],
                 cast = form.cleaned_data['cast'],
                 image = form.cleaned_data['image'],
+                certification = form.cleaned_data['certification'],
+                relevance = form.cleaned_data['relevance']
 
             )
             if not data_from_form.image:

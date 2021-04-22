@@ -2,10 +2,10 @@
 <div class="pagination" >
     <ul class="pagination pagination-lg  " >
         {% if page_obj.has_previous %}
-        <li class="page-item border border-dark" >
+        <li class="page-item " >
             <a class="page-link text-white bg-dark border border-dark " href="?page=1"><span aria-hidden="true">&laquo;</span></a>
         </li>
-        <li class="page-item border border-dark">
+        <li class="page-item">
             <a class="page-link text-white bg-dark border border-dark" href="?page={{ page_obj.previous_page_number }}">&lsaquo;</a>
         </li>
         {% endif %}

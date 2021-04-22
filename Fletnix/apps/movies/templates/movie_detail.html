@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block css %}
+
 <style>
     .card{
         background-color: rgba(0,0,0,0.5);
@@ -21,7 +22,12 @@
             <div class="col-md-9">
               <div class="card-body " >
                 <h2 class="text-light " > <strong>{{obj.title}}</strong> {{obj.year}}</h2>
-                <p class="text-muted">{{obj.genre}}</p>
+                <p class="text-muted">{% if obj.certification %}<span class="border border-secondary p-1" >{{obj.certification}}</span> {% endif %}{{obj.genre}}</p>
+                
+                {% if obj.relevance %}
+                <p class="text-light">Relevance <span class="text-muted">{{obj.relevance}}%</span></p>
+                {% endif %}
+                  
                 <div class="summary">
                     <h5 class="text-light ">Summary</h5>
                     <p class="card-text text-light">{{obj.summary}}</p>
@@ -72,7 +78,7 @@
                 height="480"
                 poster="{{obj.cover}}"
                 data-setup="{}">
-                <source src="{{obj.url}}" type="video/mp4">
+                
             </video>
           {% endif %}
             
@@ -83,12 +89,41 @@
   </div>
 {% endblock main %}
 {% block js %}
+<script src="{% static 'js/videojs-playlist.js'%}"></script>
+<script src="https://vjs.zencdn.net/7.7.5/video.js"></script>
+
     <script>
         const videoPlayer = document.getElementById("my-video")
         const videoModal = document.getElementById("videoModal")
         videoModal.addEventListener('hidden.bs.modal', function(){
-            videoPlayer.pause()
+            video.pause()
         })
+
+
+        const videoList = [{{obj.url|safe}}]
+        
+        const video = videojs(document.getElementById("my-video"),{
+          inactivityTimeout:0
+        })
+        try{
+          video.volume(1);
+        }
+        catch (e){}
+
+        video.on([
+        'duringplaylistchange',
+        'playlistchange',
+        'beforeplaylistitem',
+        'playlistitem',
+        // 'playlistsorted', para rodar aleatoriamente
+        ], function (e) {
+          videojs.log('player saw "' + e.type + '"')
+          // video.playlist.shuffle({rest:true})
+          // video.playlist.autoadvance(0)
+          video.playlist.nextButton(true)
+        })
+        
+        video.playlist(videoList)
        
     </script>
 {% endblock js %}

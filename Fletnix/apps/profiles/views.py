@@ -41,6 +41,7 @@ def who_is_watching(request, pk):
     profile = get_object_or_404(Profiles, pk = pk)
     obj = WhoIsWatching.objects.all()
     
+
     if not obj:
         print('nao tem obj vou criar')
         obj = WhoIsWatching.objects.create(person = profile, person_avatar = profile.user_avatar, person_age = profile.user_age)
@@ -54,5 +55,7 @@ def who_is_watching(request, pk):
         obj.save()
        
         return redirect('movies:index')
+
+    # Por enquanto somente uma instancia de WhoIsWacthing pode ser criada
     
     

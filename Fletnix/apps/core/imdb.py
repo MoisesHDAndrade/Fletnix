@@ -21,7 +21,7 @@ def get_cover(obj):
     
     people = soup.find(class_="people scroller")
     cards = ''
-    
+   
     try:
         cards = people.find_all(class_="card")
     except Exception as e:
@@ -43,7 +43,17 @@ def get_cover(obj):
     subtext = ''
     if soup.find(class_="facts") != None:
         subtext = soup.find(class_="facts")
+
+    relevance = ''
+    if soup.find(class_='user_score_chart'):
+        relevance = soup.find(class_='user_score_chart').get('data-percent')
+        
+      
     
+    certification = ''
+    if subtext.find(class_ = 'certification'):
+        certification = subtext.find(class_ = 'certification').text.strip()
+   
     genre = subtext.find_all(class_="genres")
     
     genre_list = []
@@ -72,13 +82,16 @@ def get_cover(obj):
         'summary':summary, 
         'year':year,
         'trailer':trailer,
-        'actors':actors}
+        'actors':actors,
+        'certification':certification,
+        'relevance':relevance}
     
     return res
+
 def search_imdb(url_string, language):
     headers = {'User-Agent': 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:52.0) Gecko/20100101 Firefox/52.0'}
     url = f'https://www.themoviedb.org/search{language}&query={url_string}'
-    print(url)
+    
     result = dict()
     page = requests.get(url, headers = headers)
     soup = bs(page.text, 'html.parser')

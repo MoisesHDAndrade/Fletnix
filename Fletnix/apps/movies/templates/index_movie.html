@@ -62,12 +62,17 @@
     <div class="row">
       <div class="gallery js-flickity" data-flickity-options='{ "freeScroll": true, "wrapAround": true }'>
         {% for movie in recents %}
+        
+       
         <div class="gallery-cell">
           <a href="{%url 'movies:detail' movie.id%}"><img src="{{movie.cover}}" alt="">
             <div class="carousel-caption d-none d-md-block d-sm-block" style="background-color:rgba(0,0,0,0.8);">
               <h5> <strong>{{movie.title}}</strong> </h5>
             </div></a>
         </div>
+       
+          
+       
         {% endfor %}
       </div>
     </div>
