@@ -3,7 +3,10 @@ from django.views.generic import ListView
 from django.contrib import messages
 from django.db.models import Q
 from django.core.files import File
+from django.utils.decorators import method_decorator
+from django.contrib.auth.decorators import login_required
 from rest_framework import generics
+from django.http import HttpResponse
 
 from Fletnix.apps.core.imdb import search_imdb, get_cover
 from Fletnix.apps.profiles.models import WhoIsWatching
@@ -26,6 +29,7 @@ class MovieUpdateApiView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Movies.objects.all()
     serializer_class = MoviesSerializer
 
+@method_decorator(login_required, name = 'dispatch')
 class MovieIndexView(ListView):
     model = Movies
     context_object_name = 'movies'
@@ -141,3 +145,15 @@ def movie_add(request):
         if form.errors:
             print(form.errors)
     return render(request, 'movie_info.html', {'form':form})
+
+
+def save_titles(request):
+    movies = Movies.objects.all()
+    movie_list = []
+    for movie in movies:
+        movie_dict = {"title":movie.title, "url":movie.url}
+        movie_list.append(movie_dict)
+        # print(f'{movie.title} {movie.url}')
+    with open('titles_saved.txt','w') as file:
+        file.write(str(movie_list))
+    return HttpResponse(movies)
