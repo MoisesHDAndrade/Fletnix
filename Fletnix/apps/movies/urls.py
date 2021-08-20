@@ -11,6 +11,7 @@ urlpatterns = [
     path('library/movie/<int:pk>/', views.movie_detail, name = 'detail'),
 
     path('save_title/',views.save_titles),
+    path('scrape_server/',views.scrape_from_server),
 
     path('api/movies/', views.MoviesAddApiView.as_view(), name='list_api_view'),
     path('api/movies/<int:pk>/', views.MovieUpdateApiView.as_view(), name='movie_update_view'),

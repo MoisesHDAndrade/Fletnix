@@ -19,6 +19,8 @@ import requests
 from urllib import request as req
 from tempfile import NamedTemporaryFile
 
+import json
+
 lista = []
 
 class MoviesAddApiView(generics.ListCreateAPIView):
@@ -154,6 +156,45 @@ def save_titles(request):
         movie_dict = {"title":movie.title, "url":movie.url}
         movie_list.append(movie_dict)
         # print(f'{movie.title} {movie.url}')
-    with open('titles_saved.txt','w') as file:
-        file.write(str(movie_list))
+      
+    with open('titles_saved.json','w') as file:
+        teste = json.dump(movie_list, file)
     return HttpResponse(movies)
+
+
+
+
+###############################################################################################
+
+def search_from_my_server(request, search):
+
+    dicionario = dict()
+    global lista
+    lista = []
+    res = search_imdb(search, request.user.user_profile.user_language)
+  
+    if len(list(res)) > 0:
+        return res
+    else:
+        movie_less_last = search.strip(".mp4")[:-1]
+        last_char = search.strip(".mp4")[-1]
+        fixed_name = f'{movie_less_last} {last_char}'
+        return search_imdb(fixed_name, request.user.user_profile.user_language)
+        
+
+
+
+def scrape_from_server(request):
+    req = requests.get('http://192.168.1.18/Filmes/')
+    soup = bs(req.text, 'html.parser')
+    movie_link = soup.find_all('a')
+    for link in movie_link:
+        if 'href' in link.attrs and  'mp4' in link.attrs['href']:
+            res = search_from_my_server(request, link.text.strip('.mp4'))
+            item = list(res)
+            print(item)
+            # sliced = str(list(res).img).split('"')
+            # print(sliced)
+            
+    # print(movie_link)
+    return HttpResponse(req)

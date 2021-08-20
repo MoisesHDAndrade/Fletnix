@@ -20,7 +20,7 @@
             <div class="col-md-9 ">
               <div class="card-body " >
                 <h2 class="text-light " id="movie_title"> <strong>{{res.title}}</strong> {{res.year}}</h2>
-                <p class="text-muted"><span class="border border-secondary p-1" >{{res.certification}}</span>{% for item in res.genre %}{{item}}{% if not forloop.last %},{% endif %}{%endfor%}</p>
+                <p class="text-muted"><span class="border border-secondary p-1" >{% if res.certification %}{{res.certification}}{% endif %}</span>{% for item in res.genre %}{{item}}{% if not forloop.last %},{% endif %}{%endfor%}</p>
                 <p class="text-light">Relevance <span class="text-muted">{{res.relevance}}%</span></p>
                 <div class="summary">
                     <h5 class="text-light ">Summary</h5>

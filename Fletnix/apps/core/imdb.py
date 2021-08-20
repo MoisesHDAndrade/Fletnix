@@ -48,7 +48,6 @@ def get_cover(obj):
     if soup.find(class_='user_score_chart'):
         relevance = soup.find(class_='user_score_chart').get('data-percent')
         
-      
     
     certification = ''
     if subtext.find(class_ = 'certification'):
